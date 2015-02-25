@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Uninstall APK
+Type=Application
+Comment=Uninstall an installed Android application package
+GenericName=Uninstall APK
+Exec=../avd-launcher-menuitems.sh uninstall-apk
+Icon=avd-uninstall-apk
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;

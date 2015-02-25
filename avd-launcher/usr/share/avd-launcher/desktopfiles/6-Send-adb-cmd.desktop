@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Send adb commands to AVD
+Type=Application
+Comment=Send adb commands to AVD
+GenericName=Send adb command to AVD
+Exec=../avd-launcher-menuitems.sh adb
+Icon=avd-adb
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;

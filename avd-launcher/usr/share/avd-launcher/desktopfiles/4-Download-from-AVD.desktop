@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Download from AVD
+Type=Application
+Comment=Download files/folder to AVD using 'adb pull' command
+GenericName=Download files from AVD
+Exec=../avd-launcher-menuitems.sh download
+Icon=avd-download
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;

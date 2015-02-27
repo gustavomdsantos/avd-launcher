@@ -1,5 +1,5 @@
 Package: avd-launcher
-Version: 0.1.4
+Version: 0.1.0
 Section: devel
 Maintainer: Gustavo Moraes <gustavosotnas1@gmail.com>
 Homepage: http://www.example.org
@@ -8,9 +8,8 @@ Architecture: all
 Depends: yad, zenity, wmctrl
 Description: Android Virtual Device Launcher
  AVD Launcher is a script that allow you to launch Android SDK Emulator, 
- without opening Android Studio or or using command-line interface (terminal).
+ without opening Android Studio or using command-line interface (terminal).
  .
  You can also perform some operations with Android Virtual Device (AVD) opened: 
  Install and Uninstall APKs, copy files to the AVD or AVD to the computer, 
  install Google Apps (Android 4.3+ only) and send adb commands to the AVD. 
-

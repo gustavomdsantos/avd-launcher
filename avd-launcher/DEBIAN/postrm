@@ -1,0 +1,5 @@
+#! /bin/bash
+
+set -e;
+
+rm -f "$HOME/.config/androidSDK_path.conf"

@@ -6,7 +6,7 @@
 
 APP_NAME="Android Virtual Device Launcher"
 VERSION="0.1.0"
-CONFIG_FILE_SDK="androidSDK_path.conf"
+CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
 HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows running the Android SDK emulator without opening Android Studio or using command-line interface (terminal). You can also perform some operations with Android Virtual Device (AVD) opened: Install and Uninstall APKs, copy files to the AVD or AVD to the computer, install Google Apps (Android 4.3+ only) and send adb commands to the AVD."
 ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
@@ -129,7 +129,7 @@ validate_android_SDK_path() # Verifica se o caminho do Android SDK dado é váli
 	-e 'system-images' \
 	-e 'tools' > /dev/null && find "$1/platform-tools/adb" "$1/tools/emulator" > /dev/null # Verifica a existência das pastas do Android SDK (ls com otimizações) e dos programas "adb" e "emulator"
 	then
-		echo "$1" > $CONFIG_FILE_SDK; # Escreve para um arquivo de configuração
+		echo "$1" > "$CONFIG_FILE_SDK"; # Escreve para um arquivo de configuração
 		return $?;
 	else
 		dialog_invalid_folder;

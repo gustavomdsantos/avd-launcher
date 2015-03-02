@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# Author: Gustavo Moraes <gustavosotnas@gmail.com>
+#
+# This file is subject to the terms and conditions of the GNU General Public
+# License. See the file COPYING in the main directory of this archive
+# for more details.
+
 # RETURN CODES personalizados do AVD Launcher:
 # 	50 = "Yes" para fechar
 #	100 = "No" para fechar

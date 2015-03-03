@@ -1,8 +1,9 @@
 Package: avd-launcher
-Version: 0.1.0
+Version: 0.1.1
 Section: devel
 Maintainer: Gustavo Moraes <gustavosotnas1@gmail.com>
-Homepage: http://www.example.org
+Homepage: https://github.com/gustavosotnas/avd-launcher
+Installed-Size: 89
 Priority: optional
 Architecture: all
 Depends: yad, zenity, wmctrl

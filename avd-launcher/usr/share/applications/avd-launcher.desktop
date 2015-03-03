@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=AVD Launcher
+Version=1.0
+Exec=avd-launcher
+Comment=A simple tool that allows running Android SDK Emulator easily.
+Icon=android
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=GNOME;GTK;Development;

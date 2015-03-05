@@ -11,7 +11,7 @@
 #	100 = "No" para fechar
 
 APP_NAME="Android Virtual Device Launcher"
-VERSION="0.1.1"
+VERSION="0.1.2"
 CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
 HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows running the Android SDK emulator without opening Android Studio or using command-line interface (terminal). You can also perform some operations with Android Virtual Device (AVD) opened: Install and Uninstall APKs, copy files to the AVD or AVD to the computer, install Google Apps (Android 4.3+ only) and send adb commands to the AVD."
@@ -203,6 +203,8 @@ load_avd()
 	EMULATOR_PID=$(ps -xo pid,command | grep emulator | grep --invert-match grep | cut -d'.' -f1) # Nome do processo pode ser "emulator64-x86", "emulator-x86", "emulator-arm", "emulator-mips", etc. ### Poderia usar o comando "pidof", mas a filtragem para obter apenas o nome do processo (sem "PATH" junto) daria um comando enorme, com um monte de pipes (mais LENTO!)
 	EMULATOR_PSTATE="S"; # Valor inicial ("SLEEPING": apenas para entrar no while)
 	( # Início do pipe para o zenity
+	sleep 1;
+	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top"
 	sleep 4; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
 	while [ "$EMULATOR_PSTATE" != "R" ] # Enquanto o emulador não estiver no estado "Running" (PROCESS STATE CODES: R -> running or runnable (on run queue); D -> uninterruptible sleep (usually IO); S -> interruptible sleep (waiting for an event to complete); Z -> defunct/zombie, terminated but not reaped by its parent; T -> stopped, either by a job control signal or because it is being traced)
 	do

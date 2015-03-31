@@ -49,6 +49,6 @@ verify_safe_exit()
 
 case $1 in
 	"about") displayAboutDialog;; # Abre uma janela de diálogo "sobre"
-	"cancel") displayCancelDialog; verify_term_all;; # Interrompe todos os processos relacionados ao AVD Launcher
+	"cancel") displayCancelDialog; verify_term_all;; # Interrompe todos os processos relacionados ao programa
 	"safe-exit") displayCancelDialog; verify_safe_exit;;
 esac;

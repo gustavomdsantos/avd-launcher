@@ -12,7 +12,7 @@ Language
 
 English
 --------------------------
-**AVD Launcher** is a simple tool made in Bash that allows to run the *Android SDK* emulator without opening *Android Studio* or using command-line interface (terminal).
+**AVD Launcher** is a simple tool written in Bash that allows to run the *Android SDK* emulator without opening *Android Studio* or using command-line interface (terminal).
 
 ### License
 **AVD Launcher** is distributed under the terms of the [GNU General Public License](http://www.gnu.org/licenses/), version 2 or later. See the COPYING file for details.

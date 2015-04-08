@@ -11,7 +11,7 @@
 #	100 = "No" para fechar
 
 APP_NAME="Android Virtual Device Launcher"
-VERSION="0.1.2"
+VERSION="0.2.0-nightly"
 CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
 HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows running the Android SDK emulator without opening Android Studio or using command-line interface (terminal). You can also perform some operations with Android Virtual Device (AVD) opened: Install and Uninstall APKs, copy files to the AVD or AVD to the computer, install Google Apps (Android 4.3+ only) and send adb commands to the AVD."
@@ -183,7 +183,7 @@ choose_avd()
 
 get_AVD_choice()
 {
-	chosen_AVD_tmp=$(echo "$1" | yad --title "$APP_NAME" --list --center --width=350 --height=200 --image="android" --window-icon="android" --icon-name="android" --text "Choose below one of the Android Virtual Devices (AVDs) to run:" --radiolist --separator="" --column "Pick" --column "AVD" --print-column=2 --borders=5 --button=Cancel:"./avd-launcher-helper.sh cancel" --button=Launch:0);
+	chosen_AVD_tmp=$(echo "$1" | yad --title "$APP_NAME" --list --center --width=350 --height=200 --image="android" --window-icon="android" --icon-name="android" --text "Choose below one of the Android Virtual Devices (AVDs) to run:" --radiolist --separator="" --column "Pick" --column "AVD" --print-column=2 --borders=5 --button=About:"./avd-launcher-helper.sh about" --button=Cancel:"./avd-launcher-helper.sh cancel" --button=Launch:0);
 		process_return_cancel_button;
 	local returnCode=$?; # Armazena o return da janela para controlar depois (variável local)
 	echo "$chosen_AVD_tmp";
@@ -205,7 +205,7 @@ load_avd()
 	( # Início do pipe para o zenity
 	sleep 1;
 	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top"
-	sleep 4; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
+	sleep 3; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
 	while [ "$EMULATOR_PSTATE" != "R" ] # Enquanto o emulador não estiver no estado "Running" (PROCESS STATE CODES: R -> running or runnable (on run queue); D -> uninterruptible sleep (usually IO); S -> interruptible sleep (waiting for an event to complete); Z -> defunct/zombie, terminated but not reaped by its parent; T -> stopped, either by a job control signal or because it is being traced)
 	do
 		sleep 1;
@@ -213,7 +213,7 @@ load_avd()
 	done # Quando o emulador entrar no estado "Running", ele sai do loop e é impresso "100" para o zenity fechar
 	echo 100; # Fecha o zenity (100% de progresso)
 	) | # Pipe!
-	zenity --title "$APP_NAME" --progress --pulsate --no-cancel --window-icon="android" --icon-name="android" --text "Initializing Android SDK Emulator with the \"$CHOSEN_AVD\" AVD..." --auto-close # Não foi usado o "yad" aqui porque esse tem bugs na barra de progresso no modo "pulsate"
+	zenity --title "$APP_NAME" --progress --pulsate --no-cancel --window-icon="android" --icon-name="android" --text "Initializing Android SDK Emulator with the \"$CHOSEN_AVD\" AVD..." --auto-close; # Não foi usado o "yad" aqui porque esse tem bugs na barra de progresso no modo "pulsate"
 }
 
 menu()

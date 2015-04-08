@@ -8,7 +8,7 @@ Priority: optional
 Architecture: all
 Depends: yad, zenity, wmctrl
 Description: Android Virtual Device Launcher
- AVD Launcher is a script that allow you to launch Android SDK Emulator, 
+ AVD Launcher is a simple tool that allow you to launch Android SDK Emulator, 
  without opening Android Studio or using command-line interface (terminal).
  .
  You can also perform some operations with Android Virtual Device (AVD) opened: 

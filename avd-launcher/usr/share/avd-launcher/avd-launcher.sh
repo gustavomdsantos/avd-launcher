@@ -199,17 +199,17 @@ execute_AVD_emulator() # Faz uma chamada para o emulador do Android SDK passando
 
 load_avd()
 {
+	( # Início do subshell para o zenity
 	sleep 1; # Tempo suficiente para o processo ser criado (para não pegar PID vazio na próxima linha)
-	EMULATOR_PID=$(ps -xo pid,command | grep emulator | grep --invert-match grep | cut -d'.' -f1) # Nome do processo pode ser "emulator64-x86", "emulator-x86", "emulator-arm", "emulator-mips", etc. ### Poderia usar o comando "pidof", mas a filtragem para obter apenas o nome do processo (sem "PATH" junto) daria um comando enorme, com um monte de pipes (mais LENTO!)
+	EMULATOR_PID=$(ps -xo pid,command | grep emulator | grep --invert-match grep | cut -d'.' -f1) # Nome do processo pode ser "emulator64-x86", "emulator-x86", "emulator-arm", "emulator-mips", etc.
 	EMULATOR_PSTATE="S"; # Valor inicial ("SLEEPING": apenas para entrar no while)
-	( # Início do pipe para o zenity
 	sleep 1;
 	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top"
-	sleep 3; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
+	sleep 10; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
 	while [ "$EMULATOR_PSTATE" != "R" ] # Enquanto o emulador não estiver no estado "Running" (PROCESS STATE CODES: R -> running or runnable (on run queue); D -> uninterruptible sleep (usually IO); S -> interruptible sleep (waiting for an event to complete); Z -> defunct/zombie, terminated but not reaped by its parent; T -> stopped, either by a job control signal or because it is being traced)
 	do
 		sleep 1;
-		EMULATOR_PSTATE=$(ps -eo pid,state | grep "$EMULATOR_PID" | cut -d' ' -f2) # Obtêm o PSTATE do emulador
+		EMULATOR_PSTATE=$(ps -eo pid,state | grep "$EMULATOR_PID" | cut -d' ' -f3) # Obtêm o PSTATE do emulador
 	done # Quando o emulador entrar no estado "Running", ele sai do loop e é impresso "100" para o zenity fechar
 	echo 100; # Fecha o zenity (100% de progresso)
 	) | # Pipe!

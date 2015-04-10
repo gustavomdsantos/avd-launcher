@@ -15,16 +15,14 @@
 
 APP_NAME="Android Virtual Device Launcher"
 CMD_NAME="avd-launcher"
-VERSION="0.2.0-nightly"
+VERSION="1.0"
 APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 CONTACT_AUTHOR="http://about.me/gustavosotnas"
 APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-HELP_DESCRIPTION_TEXT_LINE1="$APP_NAME is a simple tool that allows run" 
+HELP_DESCRIPTION_TEXT_LINE1="$APP_NAME is a simple tool that allows you to run AVDs in" 
 HELP_DESCRIPTION_TEXT_LINE2="the Android SDK emulator without opening Android Studio or using"
-HELP_DESCRIPTION_TEXT_LINE3="command-line interface (terminal). You can also perform some operations with"
-HELP_DESCRIPTION_TEXT_LINE4="Android Virtual Device (AVD) opened: Install and Uninstall APKs,"
-HELP_DESCRIPTION_TEXT_LINE5="copy files to the AVD or AVD to the computer, install Google Apps (Android 4.3+ "
-HELP_DESCRIPTION_TEXT_LINE6="only) and send adb commands to the AVD."
+HELP_DESCRIPTION_TEXT_LINE3="command-line interface (terminal). just selecting the AVD from the list of"
+HELP_DESCRIPTION_TEXT_LINE4="found AVDs and clicking on \"Launch\" button."
 ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 # Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição 
@@ -36,8 +34,6 @@ ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, us
 # 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
 # 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
 # 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE5 (variável GLOBAL) - a 5ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE6 (variável GLOBAL) - a 6ª parte do texto de descrição do aplicativo
 #	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 # 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
 # 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
@@ -46,7 +42,7 @@ displayAboutDialog_GUI()
 	yad --title "About $APP_NAME" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
 	--text "<b>$APP_NAME</b>\n\n$VERSION\n\
-	\n`echo $HELP_DESCRIPTION_TEXT_LINE1 $HELP_DESCRIPTION_TEXT_LINE2 $HELP_DESCRIPTION_TEXT_LINE3 $HELP_DESCRIPTION_TEXT_LINE4 $HELP_DESCRIPTION_TEXT_LINE5 $HELP_DESCRIPTION_TEXT_LINE6`\n\
+	\n`echo $HELP_DESCRIPTION_TEXT_LINE1 $HELP_DESCRIPTION_TEXT_LINE2 $HELP_DESCRIPTION_TEXT_LINE3 $HELP_DESCRIPTION_TEXT_LINE4`\n\
 	\n<b>$ADVICE_DESCRIPTION_TEXT</b>\n\n$APP_AUTHOR <b>$CONTACT_AUTHOR</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
@@ -59,8 +55,6 @@ displayAboutDialog_GUI()
 # 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
 # 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
 # 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE5 (variável GLOBAL) - a 5ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE6 (variável GLOBAL) - a 6ª parte do texto de descrição do aplicativo
 #	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 # 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
 # 	$APP_HOMEPAGE (variável GLOBAL) - URL para o código fonte do aplicativo na Internet
@@ -75,8 +69,6 @@ displayHelp_CLI()
 	echo "$HELP_DESCRIPTION_TEXT_LINE2";
 	echo "$HELP_DESCRIPTION_TEXT_LINE3";
 	echo "$HELP_DESCRIPTION_TEXT_LINE4";
-	echo "$HELP_DESCRIPTION_TEXT_LINE5";
-	echo "$HELP_DESCRIPTION_TEXT_LINE6";
 	echo "$ADVICE_DESCRIPTION_TEXT";
 	echo;
 	echo -n "Options"; echo ":";

@@ -1,16 +1,13 @@
 Package: avd-launcher
-Version: 0.2.0
+Version: 1.0
 Section: devel
 Maintainer: Gustavo Moraes <gustavosotnas1@gmail.com>
 Homepage: https://github.com/gustavosotnas/avd-launcher
-Installed-Size: 89
+Installed-Size: 96
 Priority: optional
 Architecture: all
 Depends: yad, zenity, wmctrl
 Description: Android Virtual Device Launcher
  AVD Launcher is a simple tool that allows you to launch Android SDK Emulator, 
- without opening Android Studio or using command-line interface (terminal).
- .
- You can also perform some operations with Android Virtual Device (AVD) opened: 
- Install and Uninstall APKs, copy files to the AVD or AVD to the computer, 
- install Google Apps (Android 4.3+ only) and send adb commands to the AVD. 
+ without opening Android Studio or using command-line interface (terminal), 
+ just selecting the AVD from the list of found AVDs and clicking on "Launch".

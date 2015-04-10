@@ -7,15 +7,10 @@
 # for more details.
 
 APP_NAME="Android Virtual Device Launcher"
-VERSION="0.2.0-nightly"
+VERSION="1.0"
 CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
-HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows running the Android SDK emulator without opening Android Studio or using command-line interface (terminal). You can also perform some operations with Android Virtual Device (AVD) opened: Install and Uninstall APKs, copy files to the AVD or AVD to the computer, install Google Apps (Android 4.3+ only) and send adb commands to the AVD."
-ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
-
-#x-terminal-emulator -e echo "Teste." # Executa algum comando no terminal padrão
-
-#if adb pull - (...) else "Error";
+HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK Emulator, without opening Android Studio or using command-line interface (terminal)."
 
 # Função que começa a execução do programa.
 # Parâmetros (que o '/usr/bin/avd-launcher' passa):
@@ -134,7 +129,6 @@ define_AVD_folder()
 # Parâmetros:
 #	$APP_NAME (variável GLOBAL) - nome do aplicativo
 #	$HELP_DESCRIPTION_TEXT (variável GLOBAL) - texto de descrição do aplicativo.
-#	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso sobre o "AVD Manager"
 #	$HOME (variável de ambiente) - caminho do diretório inicial do usuário (diretório padrão para "drop-down" da janela)
 # Retorna ("echo"):
 #	$sdk_path_tmp2 - caminho do diretório escolhido pelo usuário (supostamente contém o Android SDK nele)
@@ -143,7 +137,7 @@ get_android_SDK_path()
 	# Na linha abaixo "$sdk_path_2" não pode ser variável "local" porque o EXIT CODE do "yad" é descartado (problema do Bash, talvez o pessoal do GNU Project melhore isso na próxima versão)
 	sdk_path_tmp2=$(yad --title "$APP_NAME" --form \
 		--center --width=500 --image="android" --window-icon="android" \
-		--text "$HELP_DESCRIPTION_TEXT\n\n<b>$ADVICE_DESCRIPTION_TEXT</b>" \
+		--text "$HELP_DESCRIPTION_TEXT\n\n" \
 		--field 'Android SDK Path (this is needed only once)\:':DIR $HOME --separator="" --borders=5 \
 		--button=Cancel:"./avd-launcher-helper.sh cancel" --button=OK:0);
 		process_return_cancel_button;

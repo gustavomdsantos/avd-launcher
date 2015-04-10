@@ -14,6 +14,7 @@
 #	100 = "No" para fechar
 
 APP_NAME="Android Virtual Device Launcher"
+CMD_NAME="avd-launcher"
 VERSION="0.2.0-nightly"
 APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 CONTACT_AUTHOR="http://about.me/gustavosotnas"
@@ -26,15 +27,66 @@ HELP_DESCRIPTION_TEXT_LINE5="copy files to the AVD or AVD to the computer, insta
 HELP_DESCRIPTION_TEXT_LINE6="only) and send adb commands to the AVD."
 ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
+# Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição 
+# do funcionamento do aplicativo e seu autor.
+# Parâmetros:
+# 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
+# 	$VERSION (variável GLOBAL) - a versão do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE1 (variável GLOBAL) - a 1ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE5 (variável GLOBAL) - a 5ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE6 (variável GLOBAL) - a 6ª parte do texto de descrição do aplicativo
+#	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
+# 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
+# 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
 displayAboutDialog_GUI()
 {
-	yad --title "About $APP_NAME" --info --center --width=500 --image="android" --window-icon="android" --icon-name="android" --text "<b>$APP_NAME</b>\n\n$VERSION\n\n`echo $HELP_DESCRIPTION_TEXT_LINE1 $HELP_DESCRIPTION_TEXT_LINE2 $HELP_DESCRIPTION_TEXT_LINE3 $HELP_DESCRIPTION_TEXT_LINE4 $HELP_DESCRIPTION_TEXT_LINE5 $HELP_DESCRIPTION_TEXT_LINE6`\n\n<b>$ADVICE_DESCRIPTION_TEXT</b>\n\n$APP_AUTHOR <b>$CONTACT_AUTHOR</b>" --text-align=center --borders=5 --button=Close:0;
+	yad --title "About $APP_NAME" --info \
+	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
+	--text "<b>$APP_NAME</b>\n\n$VERSION\n\
+	\n`echo $HELP_DESCRIPTION_TEXT_LINE1 $HELP_DESCRIPTION_TEXT_LINE2 $HELP_DESCRIPTION_TEXT_LINE3 $HELP_DESCRIPTION_TEXT_LINE4 $HELP_DESCRIPTION_TEXT_LINE5 $HELP_DESCRIPTION_TEXT_LINE6`\n\
+	\n<b>$ADVICE_DESCRIPTION_TEXT</b>\n\n$APP_AUTHOR <b>$CONTACT_AUTHOR</b>" \
+	--text-align=center --borders=5 --button=Close:0;
 }
 
-##displayHelp_CLI()
-##{
-
-##}
+# Função que exibe um texto de ajuda sobre o aplicativo no Terminal (CLI):
+# Uma pequena descrição do funcionamento do aplicativo, bug report, a licença do aplicativo e seu autor.
+# Parâmetros:
+# 	$CMD_NAME (variável GLOBAL) - o nome comando para executar o aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE1 (variável GLOBAL) - a 1ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE5 (variável GLOBAL) - a 5ª parte do texto de descrição do aplicativo
+# 	$HELP_DESCRIPTION_TEXT_LINE6 (variável GLOBAL) - a 6ª parte do texto de descrição do aplicativo
+#	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
+# 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
+# 	$APP_HOMEPAGE (variável GLOBAL) - URL para o código fonte do aplicativo na Internet
+# 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
+displayHelp_CLI()
+{
+	echo; # Imprime apenas um '\n'
+	echo -n "Usage"; echo -n ":"; echo " $CMD_NAME";
+	echo -n "   or"; echo -n ":"; echo -n " $CMD_NAME ["; echo -n "OPTION"; echo "]";
+	echo;
+	echo "$HELP_DESCRIPTION_TEXT_LINE1";
+	echo "$HELP_DESCRIPTION_TEXT_LINE2";
+	echo "$HELP_DESCRIPTION_TEXT_LINE3";
+	echo "$HELP_DESCRIPTION_TEXT_LINE4";
+	echo "$HELP_DESCRIPTION_TEXT_LINE5";
+	echo "$HELP_DESCRIPTION_TEXT_LINE6";
+	echo "$ADVICE_DESCRIPTION_TEXT";
+	echo;
+	echo -n "Options"; echo ":";
+	echo -n "  -h, --help			"; echo "Display this help and exit";
+	echo -n "      --version			"; echo "Shows version information and exit";
+	echo;
+	echo "Report $CMD_NAME bugs to <$APP_HOMEPAGE>";
+	echo "Released under the GNU General Public License."
+	echo "$APP_AUTHOR <$CONTACT_AUTHOR>";
+}
 
 # Função que exibe a versão do aplicativo na linha de comando - Terminal
 # Parâmetros:
@@ -49,7 +101,9 @@ displayVersion_CLI()
 # 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
 displayCancelDialog()
 {
-	yad --title "$APP_NAME" --info --center --width=350 --image="help" --window-icon="android" --icon-name="android" --text "<b>Are you sure you want to exit from $APP_NAME?</b>" --text-align=center --button=No:1 --button=Yes:0;
+	yad --title "$APP_NAME" --info \
+	--center --width=350 --image="help" --window-icon="android" --icon-name="android" \
+	--text "<b>Are you sure you want to exit from $APP_NAME?</b>" --text-align=center --button=No:1 --button=Yes:0;
 }
 
 # Função que determina se o aplicativo deverá ser finalizado a pedido do usuário.
@@ -85,7 +139,7 @@ verify_safe_exit()
 
 case $1 in
 	"about") displayAboutDialog_GUI;; # Abre uma janela de diálogo "sobre" com uma pequena ajuda de utilização do programa em GUI ("help")
-	"--help") displayHelp_CLI;; # Escreve na saída padrão (Terminal) uma ajuda de utilização do programa para CLI	"--version") displayVersion_CLI;; # Escreve na saída padrão (Terminal) a versão do aplicativo para informação
+	"--help") displayHelp_CLI;; # Escreve na saída padrão (Terminal) uma ajuda de utilização do programa para CLI
 	"--version") displayVersion_CLI;; # Escreve na saída padrão (Terminal) a versão do aplicativo para informação
 	"cancel") displayCancelDialog; verify_term_all;; # Interrompe todos os processos relacionados ao programa
 	"safe-exit") displayCancelDialog; verify_safe_exit;; # Finaliza o programa

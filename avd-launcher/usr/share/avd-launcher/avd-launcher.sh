@@ -142,7 +142,7 @@ get_android_SDK_path()
 {
 	# Na linha abaixo "$sdk_path_2" não pode ser variável "local" porque o EXIT CODE do "yad" é descartado (problema do Bash, talvez o pessoal do GNU Project melhore isso na próxima versão)
 	sdk_path_tmp2=$(yad --title "$APP_NAME" --form \
-		--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
+		--center --width=500 --image="android" --window-icon="android" \
 		--text "$HELP_DESCRIPTION_TEXT\n\n<b>$ADVICE_DESCRIPTION_TEXT</b>" \
 		--field 'Android SDK Path (this is needed only once)\:':DIR $HOME --separator="" --borders=5 \
 		--button=Cancel:"./avd-launcher-helper.sh cancel" --button=OK:0);
@@ -162,7 +162,7 @@ get_android_SDK_path()
 get_AVD_path()
 {
 	avd_path_tmp=$(yad --title "$APP_NAME" --form \
-		--center --width=500 --image="help" --window-icon="android" --icon-name="android" \
+		--center --width=500 --image="help" --window-icon="android" \
 		--text "<b>AVD Folder not found</b>\n\nCould not find the Android Virtual Devices (AVDs) folder. Normally, the AVDs are located in the <tt>~/.android/avd/</tt> folder." \
 		--field 'Android AVDs Path\:':DIR $HOME --separator="" --borders=5 \
 		--button=Cancel:"./avd-launcher-helper.sh cancel" --button=OK:0);
@@ -221,7 +221,7 @@ validate_AVD_path()
 dialog_invalid_folder()
 {
 	yad --title "$APP_NAME" --error \
-	--center --width=350 --image="error" --window-icon="android" --icon-name="android" \
+	--center --width=350 --image="error" --window-icon="android" \
 	--text "<big><b>Invalid folder, try again.</b></big>" --text-align=center \
 	--button="OK:0";
 }
@@ -259,7 +259,7 @@ choose_avd()
 get_AVD_choice()
 {
 	chosen_AVD_tmp=$(echo "$1" | yad --title "$APP_NAME" --list \
-		--center --width=350 --height=200 --image="android" --window-icon="android" --icon-name="android" \
+		--center --width=350 --height=200 --image="android" --window-icon="android" \
 		--text "Choose below one of the Android Virtual Devices (AVDs) to run:" \
 		--radiolist --separator="" --column "Pick" --column "AVD" --print-column=2 --borders=5 \
 		--button=About:"./avd-launcher-helper.sh about" --button=Cancel:"./avd-launcher-helper.sh cancel" --button=Launch:0);
@@ -293,7 +293,7 @@ loading_avd()
 	local emulator_psFilteredList=""; # Apenas para inicializar
 	sleep 1;
 	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top"
-	sleep 10; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
+	sleep 8; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
 	while [ "$emulator_pstate" != "R" ] # Enquanto o emulador não estiver no estado "Running" (PROCESS STATE CODES: R -> running or runnable (on run queue); D -> uninterruptible sleep (usually IO); S -> interruptible sleep (waiting for an event to complete); Z -> defunct/zombie, terminated but not reaped by its parent; T -> stopped, either by a job control signal or because it is being traced)
 	do
 		sleep 1;
@@ -303,7 +303,7 @@ loading_avd()
 	echo 100; # Fecha o zenity (100% de progresso)
 	) | # Pipe!
 	zenity --progress --title "$APP_NAME" \
-	--pulsate --no-cancel --window-icon="android" --icon-name="android" \
+	--pulsate --no-cancel --window-icon="android" \
 	--text "Initializing Android SDK Emulator with the \"$CHOSEN_AVD\" AVD..." --auto-close; # Não foi usado o "yad" aqui porque ele tem bugs na barra de progresso no modo "pulsate"
 }
 

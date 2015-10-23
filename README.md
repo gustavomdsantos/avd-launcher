@@ -3,7 +3,8 @@
 
 [![Stories in Backlog](https://img.shields.io/github/issues-raw/gustavosotnas/avd-launcher.svg?label=backlog&style=plastic)](https://waffle.io/gustavosotnas/avd-launcher)
 [![Stories in Ready](https://badge.waffle.io/gustavosotnas/avd-launcher.png?label=ready&title=ready)](https://waffle.io/gustavosotnas/avd-launcher)
-[![GitHub release](https://img.shields.io/github/release/gustavosotnas/avd-launcher.svg?style=plastic)](https://github.com/gustavosotnas/avd-launcher/releases/latest)
+[![GitHub release](https://img.shields.io/github/release/gustavosotnas/avd-launcher.svg?label=stable&style=plastic)](https://github.com/gustavosotnas/avd-launcher/releases/latest)
+[![GitHub tag](https://img.shields.io/github/tag/gustavosotnas/avd-launcher.svg?label=development&style=plastic)](https://github.com/gustavosotnas/avd-launcher/releases)
 
 Language
 --------

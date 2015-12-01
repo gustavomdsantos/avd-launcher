@@ -5,6 +5,7 @@
 
 [![Stories in Backlog](https://img.shields.io/github/issues-raw/gustavosotnas/avd-launcher.svg?label=backlog&style=plastic)](https://waffle.io/gustavosotnas/avd-launcher)
 [![Stories in Ready](https://badge.waffle.io/gustavosotnas/avd-launcher.png?label=ready&title=ready)](https://waffle.io/gustavosotnas/avd-launcher)
+[![GitHub license](https://img.shields.io/github/license/gustavosotnas/avd-launcher.svg?style=plastic)](https://github.com/gustavosotnas/avd-launcher/blob/master/COPYING)
 [![GitHub release](https://img.shields.io/github/release/gustavosotnas/avd-launcher.svg?label=stable&style=plastic)](https://github.com/gustavosotnas/avd-launcher/releases/latest)
 [![GitHub tag](https://img.shields.io/github/tag/gustavosotnas/avd-launcher.svg?label=development&style=plastic)](https://github.com/gustavosotnas/avd-launcher/releases)
 
@@ -38,7 +39,7 @@ Português
 ### Download e instalação
 **AVD Launcher** está disponível como um pacote *.deb* instalável para sistemas baseados no ***Debian*** (*Ubuntu, Mint, Elementary OS, Deepin, Kali, Tails,* etc.). No entanto é compatível com todas as principais distribuições Linux existentes.
 
-Para baixar o pacote *.deb*, vá para a seção [***releases***](https://github.com/gustavosotnas/avd-launcher/releases/latest) e baixe a última versão do mesmo. Instale com o [**instalador de pacotes**](https://apps.ubuntu.com/cat/applications/gdebi/) ou digite o seguinte comando em um Terminal (na pasta onde está o arquivo baixado):
+Para baixar o pacote *.deb*, vá para a seção [***releases***](https://github.com/gustavosotnas/avd-launcher/releases/latest) e baixe a última versão do mesmo. Instale com um **instalador de pacotes** como [GDebi](https://apps.ubuntu.com/cat/applications/gdebi/) ou digite o seguinte comando em um Terminal (na pasta onde está o arquivo baixado):
 
 `sudo dpkg -i avd-launcher_ver.si.on_all.deb` <br>
 (substitua `ver.si.on` pelo número da versão do aplicativo baixada)
@@ -78,7 +79,7 @@ AVD Launcher is a *front-end* to the Android Virtual Devices (AVDs) emulator fro
 ### Download and installation
 **AVD Launcher** is available as an installable *.deb* package for Debian-based systems (*Ubuntu, Mint, Elementary OS, Deepin, Kali, Tails,* etc). However it is compatible with all major existing Linux distributions.
 
-To download the *.deb* package, go to [***releases***](https://github.com/gustavosotnas/avd-launcher/releases/latest) section and download the latest version of it. Install with [**GDebi Package Installer**](https://apps.ubuntu.com/cat/applications/gdebi/) or enter the following command in a Terminal (in the folder where is the downloaded file):
+To download the *.deb* package, go to [***releases***](https://github.com/gustavosotnas/avd-launcher/releases/latest) section and download the latest version of it. Install with a **package installer** like [GDebi](https://apps.ubuntu.com/cat/applications/gdebi/) or enter the following command in a Terminal (in the folder where is the downloaded file):
 
 `sudo dpkg -i avd-launcher_ver.si.on_all.deb` <br>
 (replace `ver.si.on` with the downloaded application version number)

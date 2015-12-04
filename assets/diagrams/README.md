@@ -11,3 +11,8 @@ Os diagramas nesta pasta devem ser feitos no [**Draw.io Desktop**](https://chrom
 ### Diagrama de Casos de Uso
 
 ![avd-launcher_use_case_diagram](./avd-launcher_use_case_diagram.png)
+
+### Diagrama de fluxo de dados
+
+![avd-launcher-flow-diagram](./avd-launcher-flow-diagram.png)
+

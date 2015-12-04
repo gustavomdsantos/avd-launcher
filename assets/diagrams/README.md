@@ -12,7 +12,7 @@ Os diagramas nesta pasta devem ser feitos no [**Draw.io Desktop**](https://chrom
 
 ![avd-launcher_use_case_diagram](./avd-launcher_use_case_diagram.png)
 
-### Diagrama de fluxo de dados
+### Diagrama de atividade
 
-![avd-launcher-flow-diagram](./avd-launcher-flow-diagram.png)
+![avd-launcher_activity_diagram](./avd-launcher_activity_diagram.png)
 

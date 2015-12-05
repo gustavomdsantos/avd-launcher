@@ -16,3 +16,7 @@ Os diagramas nesta pasta devem ser feitos no [**Draw.io Desktop**](https://chrom
 
 ![avd-launcher_activity_diagram](./avd-launcher_activity_diagram.png)
 
+### Diagrama de implantação (deploy)
+
+![avd-launcher_deployment_diagram](./avd-launcher_deployment_diagram.png)
+

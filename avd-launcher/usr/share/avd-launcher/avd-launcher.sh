@@ -36,7 +36,8 @@ main()
 
 	choose_avd;
 
-	loading_avd;
+	echo -n "Tempo de execução da função 'loading_avd':";
+	time loading_avd;
 	menu;
 }
 
@@ -271,7 +272,7 @@ get_AVD_choice()
 execute_AVD_emulator()
 {
 	cd "$SDK_FOLDER"/tools; # Muda de diretório para ser possível chamar o emulador com o ponto-barra ("./") (NÃO MODIFIQUE ISSO!)
-	./emulator -avd "$CHOSEN_AVD" -netspeed full -netdelay none;
+	>&2 ./emulator -avd "$CHOSEN_AVD" -netspeed full -netdelay none >/dev/null;
 }
 
 # Função que cria uma janela de carregamento pulsante para dar "feedback" ao usuário de que o emulador do Android SDK está inicializando.

@@ -1,13 +1,13 @@
 #! /bin/bash
 
-# Author: Gustavo Moraes <gustavosotnas@gmail.com>
+# Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
 
 APP_NAME="Android Virtual Device Launcher"
-VERSION="1.0"
+VERSION="1.0.2"
 CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
 HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK Emulator, without opening Android Studio or using command-line interface (terminal)."

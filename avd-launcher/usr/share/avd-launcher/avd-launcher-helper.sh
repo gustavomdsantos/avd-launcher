@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Author: Gustavo Moraes <gustavosotnas@gmail.com>
+# Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
@@ -15,7 +15,7 @@
 
 APP_NAME="Android Virtual Device Launcher"
 CMD_NAME="avd-launcher"
-VERSION="1.0"
+VERSION="1.0.2"
 APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 CONTACT_AUTHOR="http://about.me/gustavosotnas"
 APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"

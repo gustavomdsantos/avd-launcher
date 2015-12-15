@@ -1,5 +1,5 @@
 Package: avd-launcher
-Version: 1.0.1
+Version: 1.0.2
 Section: devel
 Maintainer: Gustavo Moraes <gustavosotnas1@gmail.com>
 Homepage: https://github.com/gustavosotnas/avd-launcher
@@ -11,3 +11,7 @@ Description: Android Virtual Device Launcher
  AVD Launcher is a simple tool that allows you to launch Android SDK Emulator, 
  without opening Android Studio or using command-line interface (terminal), 
  just selecting the AVD from the list of found AVDs and clicking on "Launch".
+ .
+ This .deb was packaged using Quick DEB Builder: 
+ <https://github.com/gustavosotnas/quick-deb-builder>
+

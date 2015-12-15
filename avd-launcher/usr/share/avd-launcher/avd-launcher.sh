@@ -282,14 +282,22 @@ execute_AVD_emulator()
 loading_avd()
 {
 	( # Início do subshell para o zenity
-	local is_emulator_window_opened="false"; # Flag para o while
-
-	sleep 1; # tempo suficiente para a janela de progresso abrir e o wmctrl ser executado corretamente na próxima linha
-	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top" (vmctrl busca o nome da janela aberta)
+	local is_emulator_window_opened="false" is_loading_window_opened="false" nameAVD="${CHOSEN_AVD:0:20}"; # Flags para o while
+	
+	while [ "$is_loading_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela de carregamento do AVD Launcher
+	do
+		wmctrl -r "$APP_NAME" -b toggle,above &>/dev/null; # Deixa a janela de progresso do zenity "always-on-top" (vmctrl busca o nome da janela aberta)
+		if [ "$?" == "0" ] # Se a janela procurada está aberta
+		then
+			is_loading_window_opened="true"; # sai do while
+		else
+			sleep 0.5; # não pode ser um tempo de sleep pequeno demais, pois o comando `wmctrl` consome CPU
+		fi
+	done
 
 	while [ "$is_emulator_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela com o nome do AVD
 	do
-		wmctrl -l | grep $CHOSEN_AVD; # Lista todas as janelas abertas no computador e tenta filtar a janela cujo nome é o nome do AVD escolhido
+		wmctrl -l | grep "$nameAVD"; # Lista todas as janelas abertas no computador e tenta filtar a janela cujo nome é o nome do AVD escolhido
 		if [ "$?" == "0" ] # Se a janela procurada está aberta
 		then
 			is_emulator_window_opened="true"; # sai do while para fechar a janela de progresso

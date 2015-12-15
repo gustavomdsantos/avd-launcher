@@ -281,20 +281,24 @@ execute_AVD_emulator()
 loading_avd()
 {
 	( # Início do subshell para o zenity
-	sleep 1; # Tempo suficiente para o processo ser criado (para não pegar PID vazio na próxima linha)
-	local emulator_pid=$(ps -xo pid,command | grep emulator | grep --invert-match grep | cut -d'.' -f1) # Nome do processo pode ser "emulator64-x86", "emulator-x86", "emulator-arm", "emulator-mips", etc.
-	local emulator_pstate="S"; # Valor inicial ("SLEEPING": apenas para entrar no while)
-	local emulator_psFilteredList=""; # Apenas para inicializar
-	sleep 1;
-	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top"
-	sleep 8; # Tempo aproximado para o "emulator*" estabilizar seus PSTATES (pra não sair do while antes da hora)
-	while [ "$emulator_pstate" != "R" ] # Enquanto o emulador não estiver no estado "Running" (PROCESS STATE CODES: R -> running or runnable (on run queue); D -> uninterruptible sleep (usually IO); S -> interruptible sleep (waiting for an event to complete); Z -> defunct/zombie, terminated but not reaped by its parent; T -> stopped, either by a job control signal or because it is being traced)
+	local is_emulator_window_opened="false"; # Flag para o while
+
+	sleep 1; # tempo suficiente para a janela de progresso abrir e o wmctrl ser executado corretamente na próxima linha
+	wmctrl -r "$APP_NAME" -b toggle,above; # Deixa a janela de progresso do zenity "always-on-top" (vmctrl busca o nome da janela aberta)
+
+	while [ "$is_emulator_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela com o nome do AVD
 	do
-		sleep 1;
-		emulator_psFilteredList=$(ps -eo pid,state | grep "$emulator_pid"); # Gera uma saída filtrada do "ps" (no formato "1234 S")
-		emulator_pstate="${emulator_psFilteredList##* }"; # Obtêm o PSTATE do emulador (qualquer coisa que tiver depois do último barra de espaço (" ") na string (não fica bom usar "cut" neste caso porque a string gerada pode ter uma barra de espaço (" ") antes do número do PID - PIDs grandes fazem o "ps" colocar um " " para alinhar os números))
-	done # Quando o emulador entrar no estado "Running", ele sai do loop e é impresso "100" para o zenity fechar
+		wmctrl -l | grep $CHOSEN_AVD; # Lista todas as janelas abertas no computador e tenta filtar a janela cujo nome é o nome do AVD escolhido
+		if [ "$?" == "0" ] # Se a janela procurada está aberta
+		then
+			is_emulator_window_opened="true"; # sai do while para fechar a janela de progresso
+		else
+			sleep 0.5; # não pode ser um tempo de sleep pequeno demais, pois o comando `wmctrl | grep` consome CPU
+		fi
+	done
+
 	echo 100; # Fecha o zenity (100% de progresso)
+
 	) | # Pipe!
 	zenity --progress --title "$APP_NAME" \
 	--pulsate --no-cancel --window-icon="android" \

@@ -7,7 +7,7 @@
 # for more details.
 
 APP_NAME="Android Virtual Device Launcher"
-VERSION="1.0.2"
+VERSION="$(./avd-launcher-get-version.sh)"
 CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf"
 AVD_FOLDER="$HOME/.android/avd" # Valor padrão (default) - pode ser diferente
 HELP_DESCRIPTION_TEXT="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK Emulator, without opening Android Studio or using command-line interface (terminal)."

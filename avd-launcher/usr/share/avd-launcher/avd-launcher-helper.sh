@@ -15,7 +15,7 @@
 
 APP_NAME="Android Virtual Device Launcher"
 CMD_NAME="avd-launcher"
-VERSION="1.0.2"
+VERSION="$(./avd-launcher-get-version.sh)"
 APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 CONTACT_AUTHOR="http://about.me/gustavosotnas"
 APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"

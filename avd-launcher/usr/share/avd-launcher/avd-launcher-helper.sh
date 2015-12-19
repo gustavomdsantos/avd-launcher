@@ -33,8 +33,7 @@ Messages(){
 	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 	local CONTACT_AUTHOR="http://about.me/gustavosotnas"
 	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-	local TEXTO_DIRETA="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
-	local TEXTO_QUEBRA_DE_LINHA="$APP_NAME is a simple tool that allows you to run AVDs in\nthe Android SDK emulator without opening Android Studio or using\ncommand-line interface (terminal). just selecting the AVD from the list of\nfound AVDs and clicking on \"Launch\" button."
+	local TEXT="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 	case $1 in
@@ -44,8 +43,8 @@ Messages(){
 		4) echo $APP_AUTHOR
 		5) echo $CONTACT_AUTHOR
 		6) echo $APP_HOMEPAGE
-		7) echo $HELP_DESCRIPTION_TEXT_LINE1
-		8) echo -e $HELP_DESCRIPTION_TEXT_LINE2
+		7) echo $TEXT
+		8) echo -e "${TEXT:0:56}\n${TEXT:57:63}\n${TEXT:64:73}\n${TEXT:74:44}"
 		9) echo $ADVICE_DESCRIPTION_TEXT
 }
 # Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição
@@ -62,11 +61,11 @@ Messages(){
 # 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
 displayAboutDialog_GUI()
 {
-	yad --title "About $APP_NAME" --info \
+	yad --title "About ${Messages 1}" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
-	--text "<b>$APP_NAME</b>\n\n$VERSION\n\
-	\n`echo $TEXTO_DIRETA`\n\
-	\n<b>$ADVICE_DESCRIPTION_TEXT</b>\n\n$APP_AUTHOR <b>$CONTACT_AUTHOR</b>" \
+	--text "<b>${Messages 1}</b>\n\n${Messages 3}\n\
+	\n`Messages `\n\
+	\n<b>${Messages 9}</b>\n\n${Messages 4} <b>${Messages 5}</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
 
@@ -85,18 +84,18 @@ displayAboutDialog_GUI()
 displayHelp_CLI()
 {
 	echo; # Imprime apenas um '\n'
-	echo -n "Usage"; echo -n ":"; echo " $CMD_NAME";
-	echo -n "   or"; echo -n ":"; echo -n " $CMD_NAME ["; echo -n "OPTION"; echo "]";
+	echo -n "Usage"; echo -n ":"; echo Messages 2;
+	echo -n "   or"; echo -n ":"; echo -n " ${Messages 2} ["; echo -n "OPTION"; echo "]";
 	echo;
-	echo "$TEXTO_QUEBRA_DE_LINHA";
+	Messages 8
 	echo;
 	echo -n "Options"; echo ":";
 	echo -n "  -h, --help			"; echo "Display this help and exit";
 	echo -n "      --version			"; echo "Shows version information and exit";
 	echo;
-	echo "Report $CMD_NAME bugs to <$APP_HOMEPAGE>";
+	echo "Report ${Messages 2} bugs to <${Messages 6}>";
 	echo "Released under the GNU General Public License."
-	echo "$APP_AUTHOR <$CONTACT_AUTHOR>";
+	echo "${Messages 4} <${Messages 5}>";
 }
 
 # Função que exibe a versão do aplicativo na linha de comando - Terminal
@@ -104,7 +103,7 @@ displayHelp_CLI()
 # 	$VERSION (variável GLOBAL) - a versão do aplicativo
 displayVersion_CLI()
 {
-	echo "$VERSION";
+	echo "${Messages 3}";
 }
 
 # Função que exibe uma janela em interface gráfica perguntando ao usuário se ele quer finalizar o aplicativo.
@@ -112,9 +111,9 @@ displayVersion_CLI()
 # 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
 displayCancelDialog()
 {
-	yad --title "$APP_NAME" --info \
+	yad --title "${Messages 1}" --info \
 	--center --width=350 --image="help" --window-icon="android" --icon-name="android" \
-	--text "<b>Are you sure you want to exit from $APP_NAME?</b>" --text-align=center --button=No:1 --button=Yes:0;
+	--text "<b>Are you sure you want to exit from ${Messages 1}?</b>" --text-align=center --button=No:1 --button=Yes:0;
 }
 
 # Função que determina se o aplicativo deverá ser finalizado a pedido do usuário.

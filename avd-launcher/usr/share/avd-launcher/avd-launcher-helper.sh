@@ -13,19 +13,42 @@
 # 	50 = "Yes" para fechar
 #	100 = "No" para fechar
 
-APP_NAME="Android Virtual Device Launcher"
-CMD_NAME="avd-launcher"
-VERSION="$(./avd-launcher-get-version.sh)"
-APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
-CONTACT_AUTHOR="http://about.me/gustavosotnas"
-APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-HELP_DESCRIPTION_TEXT_LINE1="$APP_NAME is a simple tool that allows you to run AVDs in" 
-HELP_DESCRIPTION_TEXT_LINE2="the Android SDK emulator without opening Android Studio or using"
-HELP_DESCRIPTION_TEXT_LINE3="command-line interface (terminal). just selecting the AVD from the list of"
-HELP_DESCRIPTION_TEXT_LINE4="found AVDs and clicking on \"Launch\" button."
-ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
+# APP_NAME="Android Virtual Device Launcher"
+# CMD_NAME="avd-launcher"
+# VERSION="$(./avd-launcher-get-version.sh)"
+# APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
+# CONTACT_AUTHOR="http://about.me/gustavosotnas"
+# APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
+# HELP_DESCRIPTION_TEXT_LINE1="$APP_NAME is a simple tool that allows you to run AVDs in"
+# HELP_DESCRIPTION_TEXT_LINE2="the Android SDK emulator without opening Android Studio or using"
+# HELP_DESCRIPTION_TEXT_LINE3="command-line interface (terminal). just selecting the AVD from the list of"
+# HELP_DESCRIPTION_TEXT_LINE4="found AVDs and clicking on \"Launch\" button."
+# ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
-# Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição 
+Messages(){
+
+	local APP_NAME="Android Virtual Device Launcher"
+	local CMD_NAME="avd-launcher"
+	local VERSION="$(./avd-launcher-get-version.sh)"
+	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
+	local CONTACT_AUTHOR="http://about.me/gustavosotnas"
+	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
+	local TEXTO_DIRETA="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
+	local TEXTO_QUEBRA_DE_LINHA="$APP_NAME is a simple tool that allows you to run AVDs in\nthe Android SDK emulator without opening Android Studio or using\ncommand-line interface (terminal). just selecting the AVD from the list of\nfound AVDs and clicking on \"Launch\" button."
+	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
+
+	case $1 in
+		1) echo $APP_NAME
+		2) echo $CMD_NAME
+		3) echo $VERSION
+		4) echo $APP_AUTHOR
+		5) echo $CONTACT_AUTHOR
+		6) echo $APP_HOMEPAGE
+		7) echo $HELP_DESCRIPTION_TEXT_LINE1
+		8) echo -e $HELP_DESCRIPTION_TEXT_LINE2
+		9) echo $ADVICE_DESCRIPTION_TEXT
+}
+# Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição
 # do funcionamento do aplicativo e seu autor.
 # Parâmetros:
 # 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
@@ -42,7 +65,7 @@ displayAboutDialog_GUI()
 	yad --title "About $APP_NAME" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
 	--text "<b>$APP_NAME</b>\n\n$VERSION\n\
-	\n`echo $HELP_DESCRIPTION_TEXT_LINE1 $HELP_DESCRIPTION_TEXT_LINE2 $HELP_DESCRIPTION_TEXT_LINE3 $HELP_DESCRIPTION_TEXT_LINE4`\n\
+	\n`echo $TEXTO_DIRETA`\n\
 	\n<b>$ADVICE_DESCRIPTION_TEXT</b>\n\n$APP_AUTHOR <b>$CONTACT_AUTHOR</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
@@ -65,11 +88,7 @@ displayHelp_CLI()
 	echo -n "Usage"; echo -n ":"; echo " $CMD_NAME";
 	echo -n "   or"; echo -n ":"; echo -n " $CMD_NAME ["; echo -n "OPTION"; echo "]";
 	echo;
-	echo "$HELP_DESCRIPTION_TEXT_LINE1";
-	echo "$HELP_DESCRIPTION_TEXT_LINE2";
-	echo "$HELP_DESCRIPTION_TEXT_LINE3";
-	echo "$HELP_DESCRIPTION_TEXT_LINE4";
-	echo "$ADVICE_DESCRIPTION_TEXT";
+	echo "$TEXTO_QUEBRA_DE_LINHA";
 	echo;
 	echo -n "Options"; echo ":";
 	echo -n "  -h, --help			"; echo "Display this help and exit";

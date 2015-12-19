@@ -33,19 +33,30 @@ Messages(){
 	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 	local CONTACT_AUTHOR="http://about.me/gustavosotnas"
 	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-	local TEXT="$APP_NAME is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
+	local TEXT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 	case $1 in
-		1) echo $APP_NAME ;;
-		2) echo $CMD_NAME ;;
-		3) echo $VERSION ;;
-		4) echo $APP_AUTHOR ;;
-		5) echo $CONTACT_AUTHOR ;;
-		6) echo $APP_HOMEPAGE ;;
-		7) echo $TEXT ;;
-		8) echo -e "${TEXT:0:56}\n${TEXT:57:63}\n${TEXT:64:73}\n${TEXT:74:44}" ;;
-		9) echo $ADVICE_DESCRIPTION_TEXT ;;
+		# 1) echo $APP_NAME ;;
+		# 2) echo $CMD_NAME ;;
+		# 3) echo $VERSION ;;
+		# 4) echo $APP_AUTHOR ;;
+		# 5) echo $CONTACT_AUTHOR ;;
+		# 6) echo $APP_HOMEPAGE ;;
+		# 7) echo $TEXT ;;
+		# 8) echo -e "${TEXT:0:78}\n${TEXT:79:143}\n${TEXT:144:218}\n${TEXT:219:264}" ;;
+		# 9) echo $ADVICE_DESCRIPTION_TEXT ;;
+
+		1) $APP_NAME ;;
+		2) $CMD_NAME ;;
+		3) $VERSION ;;
+		4) $APP_AUTHOR ;;
+		5) $CONTACT_AUTHOR ;;
+		6) $APP_HOMEPAGE ;;
+		7) $TEXT ;;
+		8) echo -e "${TEXT:0:78}\n${TEXT:79:143}\n${TEXT:144:218}\n${TEXT:219:264}" ;;
+		9) $ADVICE_DESCRIPTION_TEXT ;;
+
 	esac
 }
 # Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição
@@ -85,10 +96,10 @@ displayAboutDialog_GUI()
 displayHelp_CLI()
 {
 	echo; # Imprime apenas um '\n'
-	echo -n "Usage"; echo -n ":"; echo "$(Messages 2)";
-	echo -n "   or"; echo -n ":"; echo -n " $(Messages 2) ["; echo -n "OPTION"; echo "]";
+	echo -n "Usage"; echo -n ":"; Messages 2;
+	echo -n "   or"; echo -n ":"; echo -n " $(Messages 10) ["; echo -n "OPTION"; echo "]";
 	echo;
-	Messages 8;
+	Messages 8
 	echo;
 	echo -n "Options"; echo ":";
 	echo -n "  -h, --help			"; echo "Display this help and exit";

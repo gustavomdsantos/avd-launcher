@@ -13,6 +13,18 @@
 # 	50 = "Yes" para fechar
 #	100 = "No" para fechar
 
+# Função que inicializa Strings em forma de variáveis locais para serem usadas em
+# outras funções do helper.
+# Constantes (Entrada - Parâmetro, Saída - String):
+# 	$APP_NAME - o nome do aplicativo
+# 	$CMD_NAME - o nome comando para executar o aplicativo
+# 	$VERSION - a versão do aplicativo
+# 	$APP_AUTHOR - o texto de direitos de autor
+# 	$CONTACT_AUTHOR - URL de contato do autor
+# 	$APP_HOMEPAGE - URL para o código fonte do aplicativo na Internet
+# 	$APP_ABOUT - texto de descrição do aplicativo
+# 	$APP_ABOUT_FMT - texto de descrição do aplicativo (formatado para CLI)
+#	$ADVICE_DESCRIPTION_TEXT - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 get_message(){
 
 	local APP_NAME="Android Virtual Device Launcher"
@@ -25,67 +37,63 @@ get_message(){
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 	case $1 in
-		1) echo "$APP_NAME";;
-		2) echo "$CMD_NAME";;
-		3) echo "$VERSION";;
-		4) echo "$APP_AUTHOR";;
-		5) echo "$CONTACT_AUTHOR";;
-		6) echo "$APP_HOMEPAGE";;
-		7) echo "$APP_ABOUT";;
-		8) echo "$APP_ABOUT" | fmt -t;;
-		9) echo "$ADVICE_DESCRIPTION_TEXT";;
+		APP_NAME) echo "$APP_NAME";;
+		CMD_NAME) echo "$CMD_NAME";;
+		VERSION) echo "$VERSION";;
+		APP_AUTHOR) echo "$APP_AUTHOR";;
+		CONTACT_AUTHOR) echo "$CONTACT_AUTHOR";;
+		APP_HOMEPAGE) echo "$APP_HOMEPAGE";;
+		APP_ABOUT) echo "$APP_ABOUT";;
+		APP_ABOUT_FMT) echo "$APP_ABOUT" | fmt -t;;
+		ADVICE_DESCRIPTION_TEXT) echo "$ADVICE_DESCRIPTION_TEXT";;
 		*) echo ".";;
 	esac
 }
+
 # Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição
 # do funcionamento do aplicativo e seu autor.
 # Parâmetros:
-# 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
-# 	$VERSION (variável GLOBAL) - a versão do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE1 (variável GLOBAL) - a 1ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
-#	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
-# 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
-# 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
+# 	$APP_NAME (via 'get_message') - o nome do aplicativo
+# 	$VERSION (via 'get_message') - a versão do aplicativo
+# 	$APP_AUTHOR (via 'get_message') - o texto de direitos de autor
+# 	$CONTACT_AUTHOR (via 'get_message') - URL de contato do autor
+# 	$APP_ABOUT (via 'get_message') - texto de descrição do aplicativo
+#	$ADVICE_DESCRIPTION_TEXT (via 'get_message') - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 displayAboutDialog_GUI()
 {
-	yad --title "About `get_message 1`" --info \
+	yad --title "About `get_message APP_NAME`" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
-	--text "<b>`get_message 1`</b>\n\n`get_message 3`\n\
-	\n`get_message 7`\n\
-	\n<b>`get_message 9`</b>\n\n`get_message 4` <b>`get_message 5`</b>" \
+	--text "<b>`get_message APP_NAME`</b>\n\n`get_message VERSION`\n\
+	\n`get_message APP_ABOUT`\n\
+	\n<b>`get_message ADVICE_DESCRIPTION_TEXT`</b>\n\n`get_message APP_AUTHOR` <b>`get_message CONTACT_AUTHOR`</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
 
 # Função que exibe um texto de ajuda sobre o aplicativo no Terminal (CLI):
 # Uma pequena descrição do funcionamento do aplicativo, bug report, a licença do aplicativo e seu autor.
 # Parâmetros:
-# 	$CMD_NAME (variável GLOBAL) - o nome comando para executar o aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE1 (variável GLOBAL) - a 1ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE2 (variável GLOBAL) - a 2ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE3 (variável GLOBAL) - a 3ª parte do texto de descrição do aplicativo
-# 	$HELP_DESCRIPTION_TEXT_LINE4 (variável GLOBAL) - a 4ª parte do texto de descrição do aplicativo
-#	$ADVICE_DESCRIPTION_TEXT (variável GLOBAL) - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
-# 	$APP_AUTHOR (variável GLOBAL) - o texto de direitos de autor
-# 	$APP_HOMEPAGE (variável GLOBAL) - URL para o código fonte do aplicativo na Internet
-# 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
+# 	$CMD_NAME (via 'get_message') - o nome comando para executar o aplicativo
+# 	$VERSION (via 'get_message')  a versão do aplicativo
+# 	$APP_AUTHOR (via 'get_message')  o texto de direitos de autor
+# 	$CONTACT_AUTHOR (via 'get_message')  URL de contato do autor
+# 	$APP_HOMEPAGE (via 'get_message')  URL para o código fonte do aplicativo na Internet
+# 	$APP_ABOUT_FMT (via 'get_message')  texto de descrição do aplicativo (formatado para CLI)
+#	$ADVICE_DESCRIPTION_TEXT (via 'get_message')  texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 displayHelp_CLI()
 {
-	echo -e "\nUsage: `get_message 2`";
-	echo -e "   or: `get_message 2` [OPTION]\n";
+	echo -e "\nUsage: `get_message CMD_NAME`";
+	echo -e "   or: `get_message CMD_NAME` [OPTION]\n";
 
-	get_message 8;
-	get_message 9;
+	get_message APP_ABOUT_FMT;
+	get_message ADVICE_DESCRIPTION_TEXT;
 
 	echo -e "\nOptions:";
 	echo -e "  -h, --help			Display this help and exit";
 	echo -e "      --version			Shows version information and exit\n";
 
-	echo "Report `get_message 2` bugs to <`get_message 6`>";
+	echo "Report `get_message CMD_NAME` bugs to <`get_message APP_HOMEPAGE`>";
 	echo "Released under the GNU General Public License."
-	echo "`get_message 4` <`get_message 5`>";
+	echo "`get_message APP_AUTHOR` <`get_message CONTACT_AUTHOR`>";
 }
 
 # Função que exibe a versão do aplicativo na linha de comando - Terminal
@@ -93,7 +101,7 @@ displayHelp_CLI()
 # 	$VERSION (variável GLOBAL) - a versão do aplicativo
 displayVersion_CLI()
 {
-	echo "$(get_message 3)";
+	echo "$(get_message VERSION)";
 }
 
 # Função que exibe uma janela em interface gráfica perguntando ao usuário se ele quer finalizar o aplicativo.
@@ -101,9 +109,9 @@ displayVersion_CLI()
 # 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
 displayCancelDialog()
 {
-	yad --title "$(get_message 1)" --info \
+	yad --title "$(get_message APP_NAME)" --info \
 	--center --width=350 --image="help" --window-icon="android" --icon-name="android" \
-	--text "<b>Are you sure you want to exit from $(get_message 1)?</b>" --text-align=center --button=No:1 --button=Yes:0;
+	--text "<b>Are you sure you want to exit from $(get_message APP_NAME)?</b>" --text-align=center --button=No:1 --button=Yes:0;
 }
 
 # Função que determina se o aplicativo deverá ser finalizado a pedido do usuário.

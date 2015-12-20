@@ -21,7 +21,7 @@ get_message(){
 	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 	local CONTACT_AUTHOR="http://about.me/gustavosotnas"
 	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-	local APP_ABOUT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
+	local APP_ABOUT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). Just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 	case $1 in
@@ -32,7 +32,7 @@ get_message(){
 		5) echo "$CONTACT_AUTHOR";;
 		6) echo "$APP_HOMEPAGE";;
 		7) echo "$APP_ABOUT";;
-		8) echo "$APP_ABOUT" | fmt -w 80;;
+		8) echo "$APP_ABOUT" | fmt -t;;
 		9) echo "$ADVICE_DESCRIPTION_TEXT";;
 		*) echo ".";;
 	esac
@@ -51,11 +51,11 @@ get_message(){
 # 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
 displayAboutDialog_GUI()
 {
-	yad --title "About $(get_message 1)" --info \
+	yad --title "About `get_message 1`" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
-	--text "<b>$(get_message 1)</b>\n\n$(get_message 3)\n\
-	\n$(get_message 7)\n\
-	\n<b>$(get_message 9)</b>\n\n$(get_message 4) <b>$(get_message 5)</b>" \
+	--text "<b>`get_message 1`</b>\n\n`get_message 3`\n\
+	\n`get_message 7`\n\
+	\n<b>`get_message 9`</b>\n\n`get_message 4` <b>`get_message 5`</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
 
@@ -73,19 +73,19 @@ displayAboutDialog_GUI()
 # 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
 displayHelp_CLI()
 {
-	echo; # Imprime apenas um '\n'
-	echo -n "Usage"; echo -n ":"; get_message 2;
-	echo -n "   or"; echo -n ":"; echo -n " $(get_message 10) ["; echo -n "OPTION"; echo "]";
-	echo;
-	get_message 8
-	echo;
-	echo -n "Options"; echo ":";
-	echo -n "  -h, --help			"; echo "Display this help and exit";
-	echo -n "      --version			"; echo "Shows version information and exit";
-	echo;
-	echo "Report $(get_message 2) bugs to <$(get_message 6)>";
+	echo -e "\nUsage: `get_message 2`";
+	echo -e "   or: `get_message 2` [OPTION]\n";
+
+	get_message 8;
+	get_message 9;
+
+	echo -e "\nOptions:";
+	echo -e "  -h, --help			Display this help and exit";
+	echo -e "      --version			Shows version information and exit\n";
+
+	echo "Report `get_message 2` bugs to <`get_message 6`>";
 	echo "Released under the GNU General Public License."
-	echo "$(get_message 4) <$(get_message 5)>";
+	echo "`get_message 4` <`get_message 5`>";
 }
 
 # Função que exibe a versão do aplicativo na linha de comando - Terminal

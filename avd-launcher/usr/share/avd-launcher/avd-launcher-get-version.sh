@@ -14,5 +14,10 @@
 # facilitará a entrega do pacote Deb com o número da versão correto em 
 # cada um dos scripts.
 
-VERSION="1.0.3"
-echo "$VERSION";
+if dpkg -s avd-launcher &>/dev/null # Se o pacote "avd-launcher" foi encontrado (stdout e stderr vão para o "Buraco Negro")
+then
+	VERSION="$(2>/dev/null dpkg -s avd-launcher | grep 'Version' | cut -d':' -f2 | xargs echo)" # stderr vai para o "Buraco Negro"
+	echo "$VERSION";
+else
+	echo "Not installed";
+fi

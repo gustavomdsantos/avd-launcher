@@ -13,18 +13,6 @@
 # 	50 = "Yes" para fechar
 #	100 = "No" para fechar
 
-# APP_NAME="Android Virtual Device Launcher"
-# CMD_NAME="avd-launcher"
-# VERSION="$(./avd-launcher-get-version.sh)"
-# APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
-# CONTACT_AUTHOR="http://about.me/gustavosotnas"
-# APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-# HELP_DESCRIPTION_TEXT_LINE1="$APP_NAME is a simple tool that allows you to run AVDs in"
-# HELP_DESCRIPTION_TEXT_LINE2="the Android SDK emulator without opening Android Studio or using"
-# HELP_DESCRIPTION_TEXT_LINE3="command-line interface (terminal). just selecting the AVD from the list of"
-# HELP_DESCRIPTION_TEXT_LINE4="found AVDs and clicking on \"Launch\" button."
-# ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
-
 get_message(){
 
 	local APP_NAME="Android Virtual Device Launcher"
@@ -38,14 +26,14 @@ get_message(){
 
 	case $1 in
 		1) echo "$APP_NAME";;
-		2) echo "$CMD_NAME" ;;
-		3) echo "$VERSION" ;;
-		4) echo "$APP_AUTHOR" ;;
-		5) echo "$CONTACT_AUTHOR" ;;
-		6) echo "$APP_HOMEPAGE" ;;
-		7) echo "$APP_ABOUT" ;;
-		8) echo -e "${APP_ABOUT:0:78}\n${APP_ABOUT:79:143}\n${APP_ABOUT:144:218}\n${APP_ABOUT:219:264}" ;;
-		9) echo "$ADVICE_DESCRIPTION_TEXT" ;;
+		2) echo "$CMD_NAME";;
+		3) echo "$VERSION";;
+		4) echo "$APP_AUTHOR";;
+		5) echo "$CONTACT_AUTHOR";;
+		6) echo "$APP_HOMEPAGE";;
+		7) echo "$APP_ABOUT";;
+		8) echo "$APP_ABOUT" | fmt -w 80;;
+		9) echo "$ADVICE_DESCRIPTION_TEXT";;
 		*) echo ".";;
 	esac
 }

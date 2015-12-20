@@ -25,7 +25,7 @@
 # HELP_DESCRIPTION_TEXT_LINE4="found AVDs and clicking on \"Launch\" button."
 # ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
-Messages(){
+get_message(){
 
 	local APP_NAME="Android Virtual Device Launcher"
 	local CMD_NAME="avd-launcher"
@@ -33,30 +33,20 @@ Messages(){
 	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes"
 	local CONTACT_AUTHOR="http://about.me/gustavosotnas"
 	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher"
-	local TEXT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
+	local APP_ABOUT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button."
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\"."
 
 	case $1 in
-		# 1) echo $APP_NAME ;;
-		# 2) echo $CMD_NAME ;;
-		# 3) echo $VERSION ;;
-		# 4) echo $APP_AUTHOR ;;
-		# 5) echo $CONTACT_AUTHOR ;;
-		# 6) echo $APP_HOMEPAGE ;;
-		# 7) echo $TEXT ;;
-		# 8) echo -e "${TEXT:0:78}\n${TEXT:79:143}\n${TEXT:144:218}\n${TEXT:219:264}" ;;
-		# 9) echo $ADVICE_DESCRIPTION_TEXT ;;
-
-		1) $APP_NAME ;;
-		2) $CMD_NAME ;;
-		3) $VERSION ;;
-		4) $APP_AUTHOR ;;
-		5) $CONTACT_AUTHOR ;;
-		6) $APP_HOMEPAGE ;;
-		7) $TEXT ;;
-		8) echo -e "${TEXT:0:78}\n${TEXT:79:143}\n${TEXT:144:218}\n${TEXT:219:264}" ;;
-		9) $ADVICE_DESCRIPTION_TEXT ;;
-
+		1) echo "$APP_NAME";;
+		2) echo "$CMD_NAME" ;;
+		3) echo "$VERSION" ;;
+		4) echo "$APP_AUTHOR" ;;
+		5) echo "$CONTACT_AUTHOR" ;;
+		6) echo "$APP_HOMEPAGE" ;;
+		7) echo "$APP_ABOUT" ;;
+		8) echo -e "${APP_ABOUT:0:78}\n${APP_ABOUT:79:143}\n${APP_ABOUT:144:218}\n${APP_ABOUT:219:264}" ;;
+		9) echo "$ADVICE_DESCRIPTION_TEXT" ;;
+		*) echo ".";;
 	esac
 }
 # Função que exibe uma janela em interface gráfica informando a versão do aplicativo e uma pequena descrição
@@ -73,11 +63,11 @@ Messages(){
 # 	$CONTACT_AUTHOR (variável GLOBAL) - URL de contato do autor
 displayAboutDialog_GUI()
 {
-	yad --title "About $(Messages 1)" --info \
+	yad --title "About $(get_message 1)" --info \
 	--center --width=500 --image="android" --window-icon="android" --icon-name="android" \
-	--text "<b>$(Messages 1)</b>\n\n$(Messages 3)\n\
-	\n`Messages `\n\
-	\n<b>$(Messages 9)</b>\n\n$(Messages 4) <b>$(Messages 5)</b>" \
+	--text "<b>$(get_message 1)</b>\n\n$(get_message 3)\n\
+	\n$(get_message 7)\n\
+	\n<b>$(get_message 9)</b>\n\n$(get_message 4) <b>$(get_message 5)</b>" \
 	--text-align=center --borders=5 --button=Close:0;
 }
 
@@ -96,18 +86,18 @@ displayAboutDialog_GUI()
 displayHelp_CLI()
 {
 	echo; # Imprime apenas um '\n'
-	echo -n "Usage"; echo -n ":"; Messages 2;
-	echo -n "   or"; echo -n ":"; echo -n " $(Messages 10) ["; echo -n "OPTION"; echo "]";
+	echo -n "Usage"; echo -n ":"; get_message 2;
+	echo -n "   or"; echo -n ":"; echo -n " $(get_message 10) ["; echo -n "OPTION"; echo "]";
 	echo;
-	Messages 8
+	get_message 8
 	echo;
 	echo -n "Options"; echo ":";
 	echo -n "  -h, --help			"; echo "Display this help and exit";
 	echo -n "      --version			"; echo "Shows version information and exit";
 	echo;
-	echo "Report $(Messages 2) bugs to <$(Messages 6)>";
+	echo "Report $(get_message 2) bugs to <$(get_message 6)>";
 	echo "Released under the GNU General Public License."
-	echo "$(Messages 4) <$(Messages 5)>";
+	echo "$(get_message 4) <$(get_message 5)>";
 }
 
 # Função que exibe a versão do aplicativo na linha de comando - Terminal
@@ -115,7 +105,7 @@ displayHelp_CLI()
 # 	$VERSION (variável GLOBAL) - a versão do aplicativo
 displayVersion_CLI()
 {
-	echo "$(Messages 3)";
+	echo "$(get_message 3)";
 }
 
 # Função que exibe uma janela em interface gráfica perguntando ao usuário se ele quer finalizar o aplicativo.
@@ -123,9 +113,9 @@ displayVersion_CLI()
 # 	$APP_NAME (variável GLOBAL) - o nome do aplicativo
 displayCancelDialog()
 {
-	yad --title "$(Messages 1)" --info \
+	yad --title "$(get_message 1)" --info \
 	--center --width=350 --image="help" --window-icon="android" --icon-name="android" \
-	--text "<b>Are you sure you want to exit from $(Messages 1)?</b>" --text-align=center --button=No:1 --button=Yes:0;
+	--text "<b>Are you sure you want to exit from $(get_message 1)?</b>" --text-align=center --button=No:1 --button=Yes:0;
 }
 
 # Função que determina se o aplicativo deverá ser finalizado a pedido do usuário.

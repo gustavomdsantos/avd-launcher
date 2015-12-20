@@ -23,28 +23,35 @@
 # 	$CONTACT_AUTHOR - URL de contato do autor
 # 	$APP_HOMEPAGE - URL para o código fonte do aplicativo na Internet
 # 	$APP_ABOUT ou $APP_ABOUT_FMT - texto de descrição do aplicativo ("FMT" = formatado para CLI)
-#	$ADVICE_DESCRIPTION_TEXT - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
+# 	$ADVICE_DESCRIPTION_TEXT - texto de aviso a respeito do AVD Manager, ferramenta que faz parte do Android SDK
 get_message()
 {
 	case $1 in
+
 		APP_NAME)
 			local APP_NAME="Android Virtual Device Launcher";
-			echo "$APP_NAME";;
+			echo "$APP_NAME";
+			;;
 		CMD_NAME)
 			local CMD_NAME="avd-launcher";
-			echo "$CMD_NAME";;
+			echo "$CMD_NAME";
+			;;
 		VERSION)
 			local VERSION="$(./avd-launcher-get-version.sh)";
-			echo "$VERSION";;
+			echo "$VERSION";
+			;;
 		APP_AUTHOR)
 			local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes";
-			echo "$APP_AUTHOR";;
+			echo "$APP_AUTHOR";
+			;;
 		CONTACT_AUTHOR)
 			local CONTACT_AUTHOR="http://about.me/gustavosotnas";
-			echo "$CONTACT_AUTHOR";;
+			echo "$CONTACT_AUTHOR";
+			;;
 		APP_HOMEPAGE)
 			local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher";
-			echo "$APP_HOMEPAGE";;
+			echo "$APP_HOMEPAGE";
+			;;
 		APP_ABOUT | APP_ABOUT_FMT)
 			local APP_ABOUT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). Just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button.";
 			if [ "$1" == "APP_ABOUT" ]
@@ -53,10 +60,12 @@ get_message()
 			elif [ "$1" == "APP_ABOUT_FMT" ]
 			then
 				echo "$APP_ABOUT" | fmt -t;
-			fi;;
+			fi
+			;;
 		ADVICE_DESCRIPTION_TEXT)
 			local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\".";
-			echo "$ADVICE_DESCRIPTION_TEXT";;
+			echo "$ADVICE_DESCRIPTION_TEXT";
+			;;
 		*) false;; # default, lança apenas um return 1
 	esac
 }

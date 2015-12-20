@@ -140,7 +140,7 @@ get_android_SDK_path()
 		--center --width=500 --image="android" --window-icon="android" \
 		--text "$HELP_DESCRIPTION_TEXT\n\n" \
 		--field 'Android SDK Path (this is needed only once)\:':DIR $HOME --separator="" --borders=5 \
-		--button=Cancel:"./avd-launcher-helper.sh cancel" --button=OK:0);
+		--button=About:"./avd-launcher-helper.sh about" --button=Cancel:"./avd-launcher-helper.sh cancel" --button=OK:0);
 		process_return_cancel_button;
 	local returnCode=$?; # Armazena o return (variável "?") para retornar depois (variável local)
 	echo "$sdk_path_tmp2"; # "return"

@@ -16,19 +16,24 @@ import model.AppInfo='source ../model/AppInfo.sh';
 # a licença do aplicativo e seu autor.
 displayHelp()
 {
-	echo -e -n "\nUsage: "; model.AppInfo getCmdName;
-	echo -e "   or: `model.AppInfo getCmdName` [OPTION]\n";
+	local HELP_TEXT="\n";
 
-	model.AppInfo getAppAbout | fmt -t;
-	model.AppInfo getAppAdvice;
+	# Concatenando Strings
+	HELP_TEXT="${HELP_TEXT}Usage: `model.AppInfo getCmdName`\n";
+	HELP_TEXT="${HELP_TEXT}   or: `model.AppInfo getCmdName` [OPTION]\n\n";
 
-	echo -e "\nOptions:";
-	echo -e "  -h, --help			Display this help and exit";
-	echo -e "      --version			Shows version information and exit\n";
+	HELP_TEXT="${HELP_TEXT}`model.AppInfo getAppAbout | fmt -t`\n";
+	HELP_TEXT="${HELP_TEXT}`model.AppInfo getAppAdvice`\n\n";
 
-	echo "Report `model.AppInfo getCmdName` bugs to <`model.AppInfo getAppHomepage`>";
-	echo "Released under the GNU General Public License."
-	echo "`model.AppInfo getAppAuthor` <`model.AppInfo getAuthorContact`>";
+	HELP_TEXT="${HELP_TEXT}Options:\n";
+	HELP_TEXT="${HELP_TEXT}  -h, --help			Display this help and exit\n";
+	HELP_TEXT="${HELP_TEXT}      --version			Shows version information and exit\n\n";
+
+	HELP_TEXT="${HELP_TEXT}Report `model.AppInfo getCmdName` bugs to <`model.AppInfo getAppHomepage`>\n";
+	HELP_TEXT="${HELP_TEXT}Released under the GNU General Public License.\n";
+	HELP_TEXT="${HELP_TEXT}`model.AppInfo getAppAuthor` <`model.AppInfo getAuthorContact`>";
+
+	echo -e "$HELP_TEXT";
 }
 
 # Função que exibe a versão do aplicativo no Terminal (CLI).

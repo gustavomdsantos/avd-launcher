@@ -16,11 +16,11 @@ import model.AppInfo='source ../model/AppInfo.sh';
 # a licença do aplicativo e seu autor.
 displayHelp()
 {
-	echo -e "\nUsage: `model.AppInfo getCmdName`";
+	echo -e -n "\nUsage: "; model.AppInfo getCmdName;
 	echo -e "   or: `model.AppInfo getCmdName` [OPTION]\n";
 
-	echo -e "`model.AppInfo getAppAbout`" | fmt -t;
-	echo -e "`model.AppInfo getAppAdvice`";
+	model.AppInfo getAppAbout | fmt -t;
+	model.AppInfo getAppAdvice;
 
 	echo -e "\nOptions:";
 	echo -e "  -h, --help			Display this help and exit";
@@ -34,7 +34,7 @@ displayHelp()
 # Função que exibe a versão do aplicativo no Terminal (CLI).
 displayVersion()
 {
-	echo "$(model.AppInfo getVersion)";
+	model.AppInfo getVersion;
 }
 
 #### MAIN ####

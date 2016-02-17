@@ -1,5 +1,5 @@
 #! /bin/bash
-shopt -s expand_aliases && alias import='alias'; # Permite usar "import" em .sh
+shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # import em .sh
 
 import model.AppInfo='source ../model/AppInfo.sh';
 
@@ -39,7 +39,7 @@ displayHelp()
 # Função que exibe a versão do aplicativo no Terminal (CLI).
 displayVersion()
 {
-	model.AppInfo getVersion;
+	echo "`model.AppInfo getVersion`";
 }
 
 #### MAIN ####

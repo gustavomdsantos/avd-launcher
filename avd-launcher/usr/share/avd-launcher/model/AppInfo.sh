@@ -1,4 +1,5 @@
 #! /bin/bash
+shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # import em .sh
 
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
@@ -11,13 +12,13 @@
 getAppName()
 {
 	local APP_NAME="Android Virtual Device Launcher";
-	echo "$APP_NAME";
+	return_str "$APP_NAME";
 }
 
 getCmdName()
 {
 	local CMD_NAME="avd-launcher";
-	echo "$CMD_NAME";
+	return_str "$CMD_NAME";
 }
 
 # Script para obter o número da versão do AVD Launcher.
@@ -30,38 +31,38 @@ getVersion()
 		xargs echo`;
 		echo "$VERSION";
 	else
-		echo "Not installed";
+		return_str "Not installed";
 	fi
 }
 
 getAppAuthor()
 {
 	local APP_AUTHOR="Copyright (C) 2015 Gustavo Moraes";
-	echo "$APP_AUTHOR";
+	return_str "$APP_AUTHOR";
 }
 
 getAuthorContact()
 {
 	local CONTACT_AUTHOR="http://about.me/gustavosotnas";
-	echo "$CONTACT_AUTHOR";
+	return_str "$CONTACT_AUTHOR";
 }
 
 getAppHomepage()
 {
 	local APP_HOMEPAGE="https://github.com/gustavosotnas/avd-launcher";
-	echo "$APP_HOMEPAGE";
+	return_str "$APP_HOMEPAGE";
 }
 
 getAppAbout()
 {
 	local APP_ABOUT="Android Virtual Device Launcher is a simple tool that allows you to run AVDs in the Android SDK emulator without opening Android Studio or using command-line interface (terminal). Just selecting the AVD from the list of found AVDs and clicking on \"Launch\" button.";
-	echo "$APP_ABOUT";
+	return_str "$APP_ABOUT";
 }
 
 getAppAdvice()
 {
 	local ADVICE_DESCRIPTION_TEXT="This tool doesn't download or manage AVDs, for that, use \"AVD Manager\".";
-	echo "$ADVICE_DESCRIPTION_TEXT";
+	return_str "$ADVICE_DESCRIPTION_TEXT";
 }
 
 ### MAIN ####

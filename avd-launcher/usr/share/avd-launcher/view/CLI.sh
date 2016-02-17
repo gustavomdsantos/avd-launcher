@@ -42,9 +42,24 @@ displayVersion()
 	echo "`model.AppInfo getVersion`";
 }
 
+# Função que exibe mensagem de erro de que o usuário entrou com args inválidos.
+# Parâmetros:
+# 	$@ - args de linha de comando inválidos
+displayInvalidArgs()
+{
+	local ARGS="`echo $@ | cut -d' ' -f2`";
+	local INVALID_ARGS_TEXT="\n`model.AppInfo getCmdName`: invalid option '$ARGS'\n";
+	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}Usage: `model.AppInfo getCmdName`\n";
+	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}   or: `model.AppInfo getCmdName` [OPTION]\n";
+	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}Try '`model.AppInfo getCmdName` --help' for more information."
+
+	echo -e "$INVALID_ARGS_TEXT";
+}
+
 #### MAIN ####
 
 case $1 in
 	"displayHelp") displayHelp;;
 	"displayVersion") displayVersion;;
+	"displayInvalidArgs") displayInvalidArgs "$@";;
 esac;

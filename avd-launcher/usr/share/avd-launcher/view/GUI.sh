@@ -16,6 +16,25 @@ import controller.GUIController='source ../controller/GUIController.sh'
 start()
 {
 	controller.GUIController verifyGUI;
+	controller.SDKController verifySDKPath;
+	controller.SDKController verifyAVDPath;
+
+	chooseAVD;
+	mainMenu;
+}
+
+# Função que permite ao usuário escolher o AVD que deseja executar,
+# de acordo com a lista de AVDs disponível.
+# Saída:
+#	$CHOSEN_AVD - o nome do AVD escolhido pelo usuário.
+chooseAVD()
+{
+
+}
+
+mainMenu()
+{
+	
 }
 
 ### MAIN ####

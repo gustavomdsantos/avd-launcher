@@ -15,10 +15,10 @@ verifyGUI()
 {
 	if [ -n "$DISPLAY" ]
 	then # Está sendo executado em interface gráfica
-		return 0;
+		return $TRUE;
 	else # O script está sendo executado em interface de texto
 		>&2 echo "This program needs to be run in GUI mode.";
-		exit 1;
+		exit $FALSE;
 	fi
 }
 

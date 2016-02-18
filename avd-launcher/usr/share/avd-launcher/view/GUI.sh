@@ -1,6 +1,7 @@
 #! /bin/bash
 
 import model.AppInfo='source ../model/AppInfo.sh';
+import controller.GUIController='source ../controller/GUIController.sh'
 
 # "Classe" que contém o código das janelas das principais funcionalidades 
 #
@@ -14,7 +15,7 @@ import model.AppInfo='source ../model/AppInfo.sh';
 # (algoritmo) tal qual no Diagrama de Atividade do AVD Launcher.
 start()
 {
-	echo "Começou o `model.AppInfo getAppName`.";
+	controller.GUIController verifyGUI;
 }
 
 ### MAIN ####

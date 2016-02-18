@@ -18,8 +18,8 @@ displayInvalidFolder()
 {
 	yad --title "`model.AppInfo getAppName`" --error \
 	--center --width=350 --image="error" --window-icon="android" \
-	--text "<big><b>Invalid folder, try again.</b></big>" --text-align=center \
-	--button="OK:0";
+	--text "<big><b>Invalid folder, try again.</b></big>" \
+	--text-align=center --borders=5 --button="OK:0";
 }
 
 # Função que exibe uma janela informando a versão do aplicativo e 

@@ -1,5 +1,4 @@
 #! /bin/bash
-shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # import em .sh
 
 import model.AppInfo='source ../model/AppInfo.sh';
 

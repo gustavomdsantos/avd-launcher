@@ -1,5 +1,4 @@
 #! /bin/bash
-shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # import em .sh
 
 import view.CLI='source ./CLI.sh';
 

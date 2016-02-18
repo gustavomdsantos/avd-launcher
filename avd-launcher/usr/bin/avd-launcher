@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# Script lançador (launcher) do AVD Launcher.
+# Seta o diretório atual como caminho diretório relativo para executar
+# as funções do programa, podendo assim executar o mesmo tanto no ambiente de
+# desenvolvimento (pasta qualquer no repositório local) quanto no ambiente de
+# produção (instalado via pacote .deb, na pasta /usr/share/bin).
+#
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public

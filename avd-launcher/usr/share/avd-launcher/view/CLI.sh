@@ -3,13 +3,13 @@ shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # impor
 
 import model.AppInfo='source ../model/AppInfo.sh';
 
+# "Classe" que contêm todas as mensagens específicas para linha de comando (CLI)
+#
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
-
-# "Classe" que contêm todas as mensagens específicas para linha de comando (CLI)
 
 # Função que exibe um texto de ajuda sobre o aplicativo no Terminal (CLI):
 # Uma pequena descrição do funcionamento do aplicativo, bug report, 

@@ -3,13 +3,14 @@ shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # impor
 
 import view.CLI='source ./CLI.sh';
 
+# "Classe" que inicia a execução propriamente dita do AVD Launcher.
+#
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
 
-# "Classe" que inia a execução propriamente dita do AVD Launcher.
 
 # Função que chama funções de possíveis caminhos de execução do App (GUI ou CLI)
 # Parâmetros:

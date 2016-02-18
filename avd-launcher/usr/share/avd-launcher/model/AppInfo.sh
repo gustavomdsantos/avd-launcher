@@ -1,13 +1,13 @@
 #! /bin/bash
 shopt -s expand_aliases && alias import='alias' return_str='echo -n -e'; # import em .sh
 
+# "Classe" que contêm informações estáticas sobre o AVD Launcher.
+#
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
-
-# "Classe" que contêm informações estáticas sobre o AVD Launcher.
 
 getAppName()
 {

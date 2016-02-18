@@ -46,7 +46,7 @@ displayVersion()
 # 	$@ - args de linha de comando inválidos
 displayInvalidArgs()
 {
-	local ARGS="`echo $@ | cut -d' ' -f2`";
+	local ARGS="`echo $@ | cut -d' ' --complement -f1`";
 	local INVALID_ARGS_TEXT="\n`model.AppInfo getCmdName`: invalid option '$ARGS'\n";
 	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}Usage: `model.AppInfo getCmdName`\n";
 	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}   or: `model.AppInfo getCmdName` [OPTION]\n";

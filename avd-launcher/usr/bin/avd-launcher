@@ -23,6 +23,10 @@
 # e criar um metacomando chamado 'return_str', que é um 'return' para Strings.
 shopt -s expand_aliases && alias import='alias' return_str='echo -n -e';
 
+# Seta variáveis GLOBAIS para o projeto (TRUE e FALSE para usar no return)
+TRUE=0;
+FALSE=1;
+
 # Obtêm o caminho do diretório completo onde está este script.
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd);
 

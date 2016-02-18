@@ -36,9 +36,23 @@ defineAndroidSDKPath()
 	# done
 }
 
+# Função que determina se o aplicativo deve ser finalizado a pedido do usuário.
+# É executada quando o usuário aperta o botão "Cancel" na janela principal do aplicativo.
+# Parâmetros:
+# 	$1 - último EXIT CODE executado (no caso, apenas o yad no "displayCancel")
+onClickCancelButton()
+{
+	if [ "$1" == "0" ] # Se o usuário quer terminar tudo (apertou o botão "Yes")
+	then
+		killall yad avd-launcher; # Mata processos pais (gera o RETURN CODE 143)
+	fi
+	return 0; # Sai
+}
+
 ### MAIN ####
 
 case $1 in
 	"verifyGUI") verifyGUI;;
 	"defineAndroidSDKPath") defineAndroidSDKPath;;
+	"onClickCancelButton") onClickCancelButton "$2";;
 esac;

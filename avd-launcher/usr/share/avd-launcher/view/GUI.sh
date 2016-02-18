@@ -9,3 +9,16 @@ import model.AppInfo='source ../model/AppInfo.sh';
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
+
+# Função principal do programa, implenta os passos das atividades de execução
+# (algoritmo) tal qual no Diagrama de Atividade do AVD Launcher.
+start()
+{
+	echo "Começou o `model.AppInfo getAppName`.";
+}
+
+### MAIN ####
+
+case $1 in
+	"start") start;;
+esac;

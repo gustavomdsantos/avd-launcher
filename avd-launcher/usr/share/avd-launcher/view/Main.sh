@@ -1,6 +1,7 @@
 #! /bin/bash
 
 import view.CLI='source ./CLI.sh';
+import view.GUI='source ./GUI.sh';
 
 # "Classe" que inicia a execução propriamente dita do AVD Launcher.
 #
@@ -22,7 +23,7 @@ main()
 		"--version" )
 			view.CLI displayVersion;; # Exibe a versão do programa
 		"") # Sem args do usuário
-			echo "A implementar";; #main;; # Executa as funcionalidades principais do programa em GUI
+			view.GUI start;; # Executa as funcionalidades do programa em GUI
 		*) # "default"
 			view.CLI displayInvalidArgs "$@";; # Exibe "opção inválida" com args
 	esac

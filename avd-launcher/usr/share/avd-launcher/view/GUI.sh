@@ -2,6 +2,7 @@
 
 import model.AppInfo='source ../model/AppInfo.sh';
 import controller.GUIController='source ../controller/GUIController.sh'
+import controller.SDKController='source ../controller/SDKController.sh'
 
 # "Classe" que contém o código das janelas das principais funcionalidades 
 #
@@ -29,16 +30,27 @@ start()
 #	$CHOSEN_AVD - o nome do AVD escolhido pelo usuário.
 chooseAVD()
 {
-
+	return 0;
 }
 
 mainMenu()
 {
-	
+	return 0;
+}
+
+# Cria janela de apresentação e pede para o usuário colocar onde está
+# localizada a pasta do Android SDK (apenas na primeira vez que o programa 
+# é executado e o SDK não está na localização padrão ou foi movido de pasta).
+# Retorna:
+#	$sdk_path_tmp2 - suposta localização do Android SDK escolhida pelo usuário
+inputAndroidSDKPath()
+{
+	echo "Janela do inputAndroidSDKPath abre aqui";
 }
 
 ### MAIN ####
 
 case $1 in
 	"start") start;;
+	"inputAndroidSDKPath") inputAndroidSDKPath;;
 esac;

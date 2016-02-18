@@ -52,7 +52,8 @@ displayInvalidArgs()
 	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}   or: `model.AppInfo getCmdName` [OPTION]\n";
 	INVALID_ARGS_TEXT="${INVALID_ARGS_TEXT}Try '`model.AppInfo getCmdName` --help' for more information."
 
-	echo -e "$INVALID_ARGS_TEXT";
+	>&2 echo -e "$INVALID_ARGS_TEXT";
+	return 1;
 }
 
 #### MAIN ####

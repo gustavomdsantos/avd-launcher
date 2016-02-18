@@ -19,7 +19,7 @@ fields()
 	case $1 in
 		"getFolderPath") getFolderPath;;
 		"setDefaultFolderPath") setDefaultFolderPath;;
-		"setFolderPath") setFolderPath "$1";;
+		"setFolderPath") setFolderPath "$2";;
 	esac;
 }
 
@@ -80,10 +80,8 @@ setFolderPath()
 	fi
 }
 
-### MAIN ####
+### MAIN com variáveis de classe (fields) ####
 
 case $1 in
-	"getFolderPath") fields getFolderPath;;
-	"setDefaultFolderPath") fields setDefaultFolderPath;;
-	"setFolderPath") fields setFolderPath "$2";;
+	*) fields "$@";;
 esac;

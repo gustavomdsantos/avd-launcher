@@ -227,12 +227,13 @@ dialog_invalid_folder()
 # Saída:
 #	$CHOSEN_AVD - o nome do AVD escolhido pelo usuário.
 choose_avd()
-{	
+{
 	local AVDs_list=$(list_installed_AVDs); # string com o esqueleto da lista de AVDs no formato "zenity/yad"
 	false; # Para entrar no while
 	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO (return =! 0)
 	do
 		CHOSEN_AVD=$(get_AVD_choice "$AVDs_list");
+		export CHOSEN_AVD; # Exportando variavel CHOSEN_AVD para que se torne variavel de ambiente e possa ser usado em outros arquivos de shell script.
 			verifyReturnCode;
 		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
 		then
@@ -283,7 +284,7 @@ loading_avd()
 {
 	( # Início do subshell para o zenity
 	local is_emulator_window_opened="false" is_loading_window_opened="false" nameAVD="${CHOSEN_AVD:0:20}"; # Flags para o while
-	
+
 	while [ "$is_loading_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela de carregamento do AVD Launcher
 	do
 		wmctrl -r "$APP_NAME" -b toggle,above &>/dev/null; # Deixa a janela de progresso do zenity "always-on-top" (vmctrl busca o nome da janela aberta)
@@ -316,10 +317,10 @@ loading_avd()
 
 # Função que deixa o AVD Launcher "em espera" até o Android SDK ser fechado.
 # É um "semáforo" que espera a thread da função "execute_AVD_emulator" finalizar para o script inteiro finalizar.
-# Sem isso, depois que a função "loading_avd" terminasse de executar (a janela do "zenity" fechasse), 
+# Sem isso, depois que a função "loading_avd" terminasse de executar (a janela do "zenity" fechasse),
 # o processo do emulador do Android SDK seria "morto" pelo script, por ter sido chamado dentro de uma thread do mesmo.
 #
-# Obs.: Nas próximas versões do AVD Launcher será implementada uma janela de menu com opções para manipulação do AVD, 
+# Obs.: Nas próximas versões do AVD Launcher será implementada uma janela de menu com opções para manipulação do AVD,
 # e por isso não teria mais necessidade de colocar um "wait" no programa, pois teria um "I/O event wait" no lugar.
 menu()
 {
@@ -368,7 +369,7 @@ process_return_cancel_button()
 		return 1; # Para entrar na função "verifyReturnCode" e abrir a janela de confirmação de fechamento do "helper"
 	else #elif[ "$returnCode" == "0" ] # O "yad" saiu normalmente
 		return 0;
-	fi 
+	fi
 }
 
 # Função que processa o RETURN CODE do último evento de I/O do programa (janelas em GUI) para decisão se o programa deve ser finalizado ou não.

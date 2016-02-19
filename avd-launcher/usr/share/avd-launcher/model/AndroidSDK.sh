@@ -14,7 +14,6 @@
 fields()
 {
 	local CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf";
-	#local CONFIG_FILE_SDK="$HOME/Área de Trabalho/androidSDK_path.conf"; #Teste
 	
 	case $1 in
 		"getFolderPath") getFolderPath;;

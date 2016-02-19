@@ -233,7 +233,6 @@ choose_avd()
 	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO (return =! 0)
 	do
 		CHOSEN_AVD=$(get_AVD_choice "$AVDs_list");
-		export CHOSEN_AVD; # Exportando variavel CHOSEN_AVD para que se torne variavel de ambiente e possa ser usado em outros arquivos de shell script.
 			verifyReturnCode;
 		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
 		then

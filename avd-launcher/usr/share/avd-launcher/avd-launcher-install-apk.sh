@@ -1,9 +1,20 @@
 # Arquivo responsável pela instalação de qualquer APK desejado pelo usuário, do PC para o emulador.
+selectDirectory(){
+
+  local Origem=$(yad --file \
+  --directory \
+  --title="Selecione o diretório do ADB" \
+  --width="500" \
+  --height="600");
+
+  adbDeviceName = $("$Origem" | grep emulator | xargs echo | cut -d' ' -f1`);
+}
 
 selectAPK(){
 
   local APK = $(yad --title "Escolha de APK" --file-selection \
-  -- center --width=300 \
+  -- center --width=800 \
+  --file --multiple --file-filter="APK | *.apk"
   -- text="Selecione qual APK deseja instalar no emulador em execução" \
   --image="/usr/share/pixmaps/avd-launcher/avd-install-apk.png" \
   );
@@ -14,5 +25,7 @@ selectAPK(){
 installAPK(){
 
   pathAPK = $(selectAPK);
-  adb -s CHOSEN_AVD install pathAPK;
+  selectDirectory;
+
+  adb -s "$adbDeviceName" install "$pathAPK";
 }

@@ -1,31 +1,30 @@
 #! /bin/bash
-adbDeviceName=`~/Android/Sdk/platform-tools/adb devices | grep emulator | xargs echo | cut -d' ' -f1`;
-sendFile()
-{
+adbPath="~/Android/Sdk/platform-tools/adb";
+sendFile(){
 
 	false; # Para entrar no while
 	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO (return =! 0)
 	do
 		filePathTmp1=$(chooseLocalFile);
 			verifyReturnCode;
-		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
-		then
+
 		emulatorPathTmp1=$(chooseEmulatorPath);
 			verifyReturnCode;
 
-			if [ "$?" != "1" ] # Se o usuário não quer sair do programa
-			then
-				adbReturn=$(adb -s "$adbDeviceName" push "$filePathTmp1" "$emulatorPathTmp1");
-				local returnCode=$?;
-				filePathTmp1=""; #desaloca variável bash
-				emulatorPathTmp1=""; #desaloca variável bash
-				generateReturnCode $returnCode; ### Aqui não pode ser usado o "return" diretamente porque iria finalizar o loop "while" (BASH bosta)
-			else # $? == 1
-				false;
-			fi
+		adbDeviceName=$(updateEmulator);
+
+		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
+		then
+			adbReturn=$(~/Android/Sdk/platform-tools/adb -s "$adbDeviceName" push "$filePathTmp1" "$emulatorPathTmp1");
+			echo "$adbReturn";
+			local returnCode=$?;
+			filePathTmp1=""; #desaloca variável bash
+			emulatorPathTmp1=""; #desaloca variável bash
+			generateReturnCode $returnCode; ### Aqui não pode ser usado o "return" diretamente porque iria finalizar o loop "while" (BASH bosta)
 		else # $? == 1
 			false;
 		fi
+
 	done
 }
 
@@ -57,3 +56,9 @@ chooseEmulatorPath(){
 	return $returnCode;
 
 }
+updateEmulator(){
+
+	adbDeviceNameTmp2=`~/Android/Sdk/platform-tools/adb devices | grep emulator | xargs echo | cut -d' ' -f1`;
+	echo "$adbDeviceNameTmp2";
+}
+sendFile;

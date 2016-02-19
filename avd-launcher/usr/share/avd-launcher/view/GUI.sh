@@ -34,6 +34,10 @@ chooseAVD()
 	return 0;
 }
 
+# Exibe uma janela de menu com opções para manipulação do AVD.
+# O menu é composto de ícones de funções tais como:
+# "Instalar APK", "Desinstalar APK", "Upload" e "download" de arquivos do AVD,
+# "Instalar aplicativos Google" e "Enviar comandos adb para o AVD".
 mainMenu()
 {
 	return 0;

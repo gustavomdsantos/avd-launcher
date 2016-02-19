@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# "Classe" que contêm informações sonre os AVDs (Android Virtual Devices)
+# "Classe" que contêm informações sobre os AVDs (Android Virtual Devices)
 #
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #

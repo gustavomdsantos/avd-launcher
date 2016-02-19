@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# "Classe" que contêm informações estáticas sobre o AVD Launcher.
+# "Classe" que contêm informações sobre o Android SDK.
 #
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #

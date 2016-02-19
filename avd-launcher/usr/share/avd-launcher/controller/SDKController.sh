@@ -77,7 +77,10 @@ listInstalledAVDs()
 #	$1 - o nome do Android Virtual Device (AVD) escolhido pelo usuário
 runAndroidSDKEmulator()
 {
-	echo -e "\n[Thread] Aqui será executado o AVD: $1";
+	# Muda diretório para chamar o emulador com o ponto-barra ("./")
+	cd "`model.AndroidSDK getFolderPath`"/tools; # NÃO MODIFIQUE ISSO!
+	# Executa o Android SDK Emulator
+	>&2 ./emulator -avd "$CHOSEN_AVD" -netspeed full -netdelay none >/dev/null;
 }
 
 ### MAIN ####

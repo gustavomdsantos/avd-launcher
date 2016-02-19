@@ -44,9 +44,47 @@ verifyAVDPath()
 	fi
 }
 
+# Cria um array do nome dos AVDs para o usuário escolher, 
+# sendo o primeiro AVD listado a opção marcada por "default" na lista.
+# Retorna:
+#	$AVDS_LIST - string com o "esqueleto" da lista dos AVDs localizados 
+# 				 para execução no formato de checklist do "zenity/YAD", exemplo: 
+# 	"TRUE Android_Wear_Round_API_20 FALSE Nexus_6_API_21 FALSE Nexus_S_API_19"
+listInstalledAVDs()
+{
+	shopt -s nullglob;
+	local installed_AVDs=("`model.AVD getFolderPath`"/*.ini); # Se tiver nome de arquivo com "espaço", vai dar problema!
+	shopt -u nullglob; # Turn off to it doesn't interfere with anything later
+	#echo "${installed_AVDs[@]}"; # Aspas para evitar nomes de arquivo quebrados
+
+	local AVDS_LIST; # Var que terá o resultado do array para string do YAD
+	for f in "${installed_AVDs[@]}"
+	do
+		if [ "$f" == "${installed_AVDs[0]}" ]
+		then
+			AVDS_LIST="${AVDS_LIST}TRUE "; # Palavra-chave do "yad" para marcar na lista (um "radio button")
+		else
+			AVDS_LIST="${AVDS_LIST}FALSE "; # Palavra-chave do "yad" para NÃO marcar na lista
+		fi
+		AVDS_LIST="${AVDS_LIST}`basename "$f" .ini` "; # Imprime o nome do arquivo sem a extensão dele (sufixo)
+	done
+	return_str "$AVDS_LIST";
+}
+
+# Chamada o emulador do Android SDK para executar o AVD desejado pelo usuário.
+# Esta função é sempre executada em BACKGROUND pelo 'defineUserAVDChosen'.
+# Parâmetros:
+#	$1 - o nome do Android Virtual Device (AVD) escolhido pelo usuário
+runAndroidSDKEmulator()
+{
+	echo -e "\n[Thread] Aqui será executado o AVD: $1";
+}
+
 ### MAIN ####
 
 case $1 in
 	"verifySDKPath") verifySDKPath;;
 	"verifyAVDPath") verifyAVDPath;;
+	"listInstalledAVDs") listInstalledAVDs;;
+	"runAndroidSDKEmulator") runAndroidSDKEmulator "$2";;
 esac;

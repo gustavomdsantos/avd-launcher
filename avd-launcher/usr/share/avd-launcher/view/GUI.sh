@@ -31,7 +31,7 @@ start()
 #	$CHOSEN_AVD - o nome do AVD escolhido pelo usuário.
 chooseAVD()
 {
-	return 0;
+	controller.GUIController defineUserAVDChosen;
 }
 
 # Exibe uma janela de menu com opções para manipulação do AVD.
@@ -71,10 +71,29 @@ inputAVDPath()
 		--button=Cancel:"./GUIDialogs.sh displayCancel" --button=OK:0
 }
 
+# Cria uma janela pedindo para o usuário escolher o AVD desejado
+# dentre os que estiverem na lista de AVDs.
+# Parâmetros:
+#	$2 - a lista de AVDs localizados para escolha (no formato "zenity/yad")
+# Retorna:
+#	$CHOSEN_AVD - o nome do AVD que o usuário escolheu
+inputUserAVDChoice()
+{
+	echo "$2" | xargs \
+	yad --title "`model.AppInfo getAppName`" --list \
+		--center --width=350 --height=200 --image="android" --window-icon="android" \
+		--text "Choose below one of the Android Virtual Devices (AVDs) to run:" \
+		--radiolist --separator="" --column "Pick" --column "AVD" --print-column=2 --borders=5 \
+		--button=About:"./GUIDialogs.sh displayAbout" \
+		--button=Cancel:"./GUIDialogs.sh displayCancel" \
+		--button=Launch:0;
+}
+
 ### MAIN ####
 
 case $1 in
 	"start") start;;
 	"inputAndroidSDKPath") inputAndroidSDKPath;;
 	"inputAVDPath") inputAVDPath;;
+	"inputUserAVDChoice") inputUserAVDChoice "$@";;
 esac;

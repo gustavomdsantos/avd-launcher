@@ -3,6 +3,7 @@
 import model.AndroidSDK='source ../model/AndroidSDK.sh';
 import view.GUI='source ../view/GUI.sh';
 import view.GUIDialogs='source ../view/GUIDialogs.sh';
+import controller.SDKController='source ../controller/SDKController.sh';
 
 # "Classe" que controla o comportamento da view.GUI
 #
@@ -62,6 +63,28 @@ defineAVDPath()
 	done
 }
 
+# Função que faz o procedimento completo de listagem de AVDs, obtenção da
+# escolha do usuário pro AVD desejado e a execução do SDK Emulator (Launching).
+defineUserAVDChosen()
+{
+	local AVDS_LIST="`controller.SDKController listInstalledAVDs`"; # Lista AVDs
+	local CHOSEN_AVD;
+	false; # Para entrar no while
+	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO
+	do
+		CHOSEN_AVD=$(view.GUI inputUserAVDChoice "$AVDS_LIST");
+		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
+		then
+			# Executa o Android SDK Emulator com o AVD escolhido 
+			# em background, "&" cria thread pra função 'runAndroidSDKEmulator'.
+			controller.SDKController runAndroidSDKEmulator "$CHOSEN_AVD" & 
+			true; # Sai do while
+		else # $? == 1
+			false; # Faz o while ter mais um loop
+		fi
+	done
+}
+
 # Função que determina se o aplicativo deve ser finalizado a pedido do usuário.
 # É executada quando o usuário abre a janela "Cancel" no aplicativo.
 # Parâmetros:
@@ -70,7 +93,7 @@ onClickCancelButton()
 {
 	if [ "$1" == "0" ] # Se o usuário quer terminar tudo (apertou o botão "Yes")
 	then
-		killall yad avd-launcher; # Mata processos pais (gera o RETURN CODE 143)
+		killall yad avd-launcher xargs; # Mata processos (gera RETURN CODE 143)
 	fi
 	return 0; # Sai
 }
@@ -81,5 +104,6 @@ case $1 in
 	"verifyGUI") verifyGUI;;
 	"defineAndroidSDKPath") defineAndroidSDKPath;;
 	"defineAVDPath") defineAVDPath;;
+	"defineUserAVDChosen") defineUserAVDChosen;;
 	"onClickCancelButton") onClickCancelButton "$2";;
 esac;

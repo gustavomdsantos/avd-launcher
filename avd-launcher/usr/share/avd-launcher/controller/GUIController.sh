@@ -1,6 +1,8 @@
 #! /bin/bash
 
+import model.AndroidSDK='source ../model/AndroidSDK.sh';
 import view.GUI='source ../view/GUI.sh';
+import view.GUIDialogs='source ../view/GUIDialogs.sh';
 
 # "Classe" que controla o comportamento da view.GUI
 #
@@ -29,15 +31,21 @@ verifyGUI()
 # não está na localização padrão OU foi movido de pasta.
 defineAndroidSDKPath()
 {
-	# false; # Para entrar no while
-	# while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO (return =! 0)
-	# do
-		view.GUI inputAndroidSDKPath;
-	# done
+	false; # Para entrar no while
+	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO
+	do
+		if ! model.AndroidSDK setFolderPath "`view.GUI inputAndroidSDKPath`"
+		then
+			view.GUIDialogs displayInvalidFolder;
+			false; # Faz o while ter +1 iteração (não pode ser return $FALSE!)
+		else
+			true; # Faz o while finalizar
+		fi
+	done
 }
 
 # Função que determina se o aplicativo deve ser finalizado a pedido do usuário.
-# É executada quando o usuário aperta o botão "Cancel" na janela principal do aplicativo.
+# É executada quando o usuário abre a janela "Cancel" no aplicativo.
 # Parâmetros:
 # 	$1 - último EXIT CODE executado (no caso, apenas o yad no "displayCancel")
 onClickCancelButton()

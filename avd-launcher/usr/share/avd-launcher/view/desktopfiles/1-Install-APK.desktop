@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Install APK
+Type=Application
+Comment=Install an Android application package
+GenericName=Install APK
+Exec=../avd-launcher-install-apk.sh
+Icon=/usr/share/pixmaps/avd-launcher/avd-install-apk.png
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;

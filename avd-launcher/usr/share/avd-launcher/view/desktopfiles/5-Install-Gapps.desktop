@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Install Google Apps (Android 4.3+ only)
+Type=Application
+Comment=Install the Android 4.1 Google Apps package to AVD
+GenericName=Install Google Apps
+Exec=../avd-launcher-avd-gapps.sh
+Icon=/usr/share/pixmaps/avd-launcher/avd-gapps.png
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;
+Comment[pt_BR.UTF-8]=Install the Android 4.3 (Jelly Bean) Gapps package to AVD

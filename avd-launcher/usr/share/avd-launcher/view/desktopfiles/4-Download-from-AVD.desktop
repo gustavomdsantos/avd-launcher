@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Download from AVD
+Type=Application
+Comment=Download files/folder to AVD using 'adb pull' command
+GenericName=Download files from AVD
+Exec=../avd-launcher-avd-download.sh
+Icon=/usr/share/pixmaps/avd-launcher/avd-download.png
+Terminal=false
+X-MultipleArgs=false
+Categories=GNOME;System;

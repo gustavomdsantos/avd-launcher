@@ -2,4 +2,4 @@
 
 set -e;
 
-rm -f "$HOME/.config/androidSDK_path.conf"
+rm -R -f "$HOME/.config/avd-launcher"

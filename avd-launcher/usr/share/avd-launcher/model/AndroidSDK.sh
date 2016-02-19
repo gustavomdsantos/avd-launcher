@@ -13,7 +13,7 @@
 # 	$1 - nome da função da "classe" pública (get / set) a ser executada
 fields()
 {
-	local CONFIG_FILE_SDK="$HOME/.config/androidSDK_path.conf";
+	local CONFIG_FILE_SDK="$HOME/.config/avd-launcher/androidSDK_path.conf";
 	
 	case $1 in
 		"getFolderPath") getFolderPath;;
@@ -72,6 +72,7 @@ setFolderPath()
 	-e 'tools' > /dev/null && find \
 	"$1/platform-tools/adb" "$1/tools/emulator" > /dev/null
 	then # A pasta é do Android SDK
+		mkdir `dirname "$CONFIG_FILE_SDK"`; # Cria pasta de arquivos de config
 		echo "$1" > "$CONFIG_FILE_SDK"; # Seta para o arquivo de configuração
 		return $TRUE;
 	else # Não é uma pasta válida, GUIController exibe dialogo "invalid folder"

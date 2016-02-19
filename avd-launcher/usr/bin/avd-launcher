@@ -1,11 +1,39 @@
 #! /bin/bash
 
+# Script lançador (launcher) do AVD Launcher.
+# Seta o diretório atual como caminho diretório relativo para executar
+# as funções do programa, podendo assim executar o mesmo tanto no ambiente de
+# desenvolvimento (pasta qualquer no repositório local) quanto no ambiente de
+# produção (instalado via pacote .deb, na pasta /usr/share/bin).
+#
+# PT: Sempre execute o projeto a partir deste script, caso contrário, dará ERRO!
+# EN: Always run the project from this script, otherwise it will give ERROR!
+#
 # Author: Gustavo Moraes <gustavosotnas1@gmail.com>
 #
 # This file is subject to the terms and conditions of the GNU General Public
 # License. See the file COPYING in the main directory of this archive
 # for more details.
 
+#### MAIN ####
+
+# Configura comandos para fazer MVC (Model-View-Controller) no projeto em Shell,
+# Fazendo o bash permitir aliases (semelhante a "override" no Ruby);
+# fazer "override" no comando 'import' para fazer referências (ex.: 'view.GUI')
+# e criar um metacomando chamado 'return_str', que é um 'return' para Strings.
+shopt -s expand_aliases && alias import='alias' return_str='echo -n -e';
+
+# Seta variáveis GLOBAIS para o projeto (TRUE e FALSE para usar no return)
+TRUE=0;
+FALSE=1;
+
+# Obtêm o caminho do diretório completo onde está este script.
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd);
-cd "$DIR"/../share/avd-launcher;
-./avd-launcher.sh $@;
+
+# Muda o diretório atual do script para o diretório relativo do script principal
+cd "$DIR"/../share/avd-launcher/view;
+
+# Executa o script principal do projeto
+# "source" para as aliases funcionarem nos scripts-filhos (mesmo processo bash -
+# current shell environment).
+source ./Main.sh $@;

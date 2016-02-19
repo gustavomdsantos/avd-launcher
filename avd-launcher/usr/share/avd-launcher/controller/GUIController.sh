@@ -1,6 +1,7 @@
 #! /bin/bash
 
 import model.AndroidSDK='source ../model/AndroidSDK.sh';
+import model.AppInfo='source ../model/AppInfo.sh';
 import view.GUI='source ../view/GUI.sh';
 import view.GUIDialogs='source ../view/GUIDialogs.sh';
 import controller.SDKController='source ../controller/SDKController.sh';
@@ -68,11 +69,10 @@ defineAVDPath()
 defineUserAVDChosen()
 {
 	local AVDS_LIST="`controller.SDKController listInstalledAVDs`"; # Lista AVDs
-	local CHOSEN_AVD;
 	false; # Para entrar no while
 	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO
 	do
-		CHOSEN_AVD=$(view.GUI inputUserAVDChoice "$AVDS_LIST");
+		CHOSEN_AVD=$(view.GUI inputUserAVDChoice "$AVDS_LIST"); #Variável GLOBAL
 		if [ "$?" != "1" ] # Se o usuário não quer sair do programa
 		then
 			# Executa o Android SDK Emulator com o AVD escolhido 
@@ -83,6 +83,38 @@ defineUserAVDChosen()
 			false; # Faz o while ter mais um loop
 		fi
 	done
+}
+
+# Função que cria uma janela de carregamento pulsante para dar "feedback" ao usuário de que o emulador do Android SDK está inicializando.
+# Dependências:
+#	$CHOSEN_AVD (variável GLOBAL) - o AVD que está sendo inicializado
+defineTimeShowingLoadingAVD()
+{
+	local is_emulator_window_opened="false" is_loading_window_opened="false" nameAVD="${CHOSEN_AVD:0:20}"; # Flags para o while
+	
+	while [ "$is_loading_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela de carregamento do AVD Launcher
+	do
+		wmctrl -r "`model.AppInfo getAppName`" -b toggle,above &>/dev/null; # Deixa a janela de progresso do zenity "always-on-top" (vmctrl busca o nome da janela aberta)
+		if [ "$?" == "0" ] # Se a janela procurada está aberta
+		then
+			is_loading_window_opened="true"; # sai do while
+		else
+			sleep 0.5; # não pode ser um tempo de sleep pequeno demais, pois o comando `wmctrl` consome CPU
+		fi
+	done
+
+	while [ "$is_emulator_window_opened" != "true" ] # enquanto o vmctrl NÃO detectar a janela com o nome do AVD
+	do
+		wmctrl -l | grep "$nameAVD"; # Lista todas as janelas abertas no computador e tenta filtar a janela cujo nome é o nome do AVD escolhido
+		if [ "$?" == "0" ] # Se a janela procurada está aberta
+		then
+			is_emulator_window_opened="true"; # sai do while para fechar a janela de progresso
+		else
+			sleep 0.5; # não pode ser um tempo de sleep pequeno demais, pois o comando `wmctrl | grep` consome CPU
+		fi
+	done
+
+	echo 100; # Fecha o zenity (100% de progresso)
 }
 
 # Função que determina se o aplicativo deve ser finalizado a pedido do usuário.
@@ -105,5 +137,6 @@ case $1 in
 	"defineAndroidSDKPath") defineAndroidSDKPath;;
 	"defineAVDPath") defineAVDPath;;
 	"defineUserAVDChosen") defineUserAVDChosen;;
+	"defineTimeShowingLoadingAVD") defineTimeShowingLoadingAVD;;
 	"onClickCancelButton") onClickCancelButton "$2";;
 esac;

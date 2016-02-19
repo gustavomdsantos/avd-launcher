@@ -22,6 +22,8 @@ start()
 	controller.SDKController verifyAVDPath;
 
 	chooseAVD;
+	loadingAVD;
+
 	mainMenu;
 }
 
@@ -32,6 +34,14 @@ start()
 chooseAVD()
 {
 	controller.GUIController defineUserAVDChosen;
+}
+
+# Função que dá ao usuário um feedback do carregamento do AVD pelo SDK Emulator.
+loadingAVD()
+{
+	controller.GUIController defineTimeShowingLoadingAVD | zenity --progress --title "`model.AppInfo getAppName`" \
+	--pulsate --no-cancel --window-icon="android" \
+	--text "Initializing Android SDK Emulator with the \"$CHOSEN_AVD\" AVD..." --auto-close; # Não foi usado o "yad" aqui porque ele tem bugs na barra de progresso no modo "pulsate"
 }
 
 # Exibe uma janela de menu com opções para manipulação do AVD.

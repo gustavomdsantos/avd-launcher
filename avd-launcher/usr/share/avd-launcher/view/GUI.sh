@@ -53,9 +53,24 @@ inputAndroidSDKPath()
 		--button=About:"./GUIDialogs.sh displayAbout" --button=Cancel:"./GUIDialogs.sh displayCancel" --button=OK:0
 }
 
+# Cria janela de alerta e pede para o usuário colocar onde está localizada
+# a pasta dos AVDs (apenas na primeira vez que o programa 
+# é executado e os AVDs não estão na localização padrão ou foi movido de pasta).
+# Retorna:
+#	$AVDPath - suposta localização dos AVDs escolhida pelo usuário
+inputAVDPath()
+{
+	yad --title "`model.AppInfo getAppName`" --form \
+		--center --width=500 --image="help" --window-icon="android" \
+		--text "<b>AVD Folder not found</b>\n\nCould not find the Android Virtual Devices (AVDs) folder. Normally, the AVDs are located in the <tt>~/.android/avd/</tt> folder." \
+		--field 'Android AVDs Path\:':DIR $HOME --separator="" --borders=5 \
+		--button=Cancel:"./GUIDialogs.sh displayCancel" --button=OK:0
+}
+
 ### MAIN ####
 
 case $1 in
 	"start") start;;
 	"inputAndroidSDKPath") inputAndroidSDKPath;;
+	"inputAVDPath") inputAVDPath;;
 esac;

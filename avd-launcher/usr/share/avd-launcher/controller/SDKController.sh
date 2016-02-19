@@ -1,6 +1,7 @@
 #! /bin/bash
 
 import model.AndroidSDK='source ../model/AndroidSDK.sh';
+import model.AVD='source ../model/AVD.sh';
 import controller.GUIController='source ../controller/GUIController.sh'
 
 # "Classe" que controla ações com o Android SDK no AVD Launcher.
@@ -27,9 +28,20 @@ verifySDKPath()
 	fi
 }
 
+# Verifica se a pasta onde estão os AVDs (Android Virtual Device) está definida.
 verifyAVDPath()
 {
-	return 0;
+	if ! model.AVD getFolderPath >/dev/null # Se não se sabe onde está os AVDs
+	then
+		if model.AVD setDefaultFolderPath
+		then
+			return $TRUE; # Os AVDs estão na localização default no Linux
+		else # Os AVDs não estão na localização default
+			controller.GUIController defineAVDPath; #Usuário define a pasta AVDs
+		fi
+	else # A localização dos AVDs já foi setada anteriormente
+		return $TRUE;
+	fi
 }
 
 ### MAIN ####

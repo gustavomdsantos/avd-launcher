@@ -44,6 +44,24 @@ defineAndroidSDKPath()
 	done
 }
 
+# Função que define o caminho do diretório onde os AVDs estão instalados.
+# É chamada APENAS na primeira vez que o programa é executado E os AVDs
+# não estão na localização padrão OU foi movido de pasta.
+defineAVDPath()
+{
+	false; # Para entrar no while
+	while [ $? -ne 0 ] # Enquanto a saída do último comando não for igual a ZERO
+	do
+		if ! model.AVD setFolderPath "`view.GUI inputAVDPath`"
+		then
+			view.GUIDialogs displayInvalidFolder;
+			false; # Faz o while ter +1 iteração (não pode ser return $FALSE!)
+		else
+			true; # Faz o while finalizar
+		fi
+	done
+}
+
 # Função que determina se o aplicativo deve ser finalizado a pedido do usuário.
 # É executada quando o usuário abre a janela "Cancel" no aplicativo.
 # Parâmetros:
@@ -62,5 +80,6 @@ onClickCancelButton()
 case $1 in
 	"verifyGUI") verifyGUI;;
 	"defineAndroidSDKPath") defineAndroidSDKPath;;
+	"defineAVDPath") defineAVDPath;;
 	"onClickCancelButton") onClickCancelButton "$2";;
 esac;

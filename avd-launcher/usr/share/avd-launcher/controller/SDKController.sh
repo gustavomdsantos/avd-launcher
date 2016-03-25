@@ -57,18 +57,23 @@ listInstalledAVDs()
 	shopt -u nullglob; # Turn off to it doesn't interfere with anything later
 	#echo "${installed_AVDs[@]}"; # Aspas para evitar nomes de arquivo quebrados
 
-	local AVDS_LIST; # Var que terá o resultado do array para string do YAD
-	for f in "${installed_AVDs[@]}"
-	do
-		if [ "$f" == "${installed_AVDs[0]}" ]
-		then
-			AVDS_LIST="${AVDS_LIST}TRUE "; # Palavra-chave do "yad" para marcar na lista (um "radio button")
-		else
-			AVDS_LIST="${AVDS_LIST}FALSE "; # Palavra-chave do "yad" para NÃO marcar na lista
-		fi
-		AVDS_LIST="${AVDS_LIST}`basename "$f" .ini` "; # Imprime o nome do arquivo sem a extensão dele (sufixo)
-	done
-	return_str "$AVDS_LIST";
+	if [ -n "$installed_AVDs" ] # Se a variável de AVDs instalados NÃO for nula
+	then # Existem AVDs no computador
+		local AVDS_LIST; # Var que terá o resultado do array para string do YAD
+		for f in "${installed_AVDs[@]}"
+		do
+			if [ "$f" == "${installed_AVDs[0]}" ]
+			then
+				AVDS_LIST="${AVDS_LIST}TRUE "; # Palavra-chave do "yad" para marcar na lista (um "radio button")
+			else
+				AVDS_LIST="${AVDS_LIST}FALSE "; # Palavra-chave do "yad" para NÃO marcar na lista
+			fi
+			AVDS_LIST="${AVDS_LIST}`basename "$f" .ini` "; # Imprime o nome do arquivo sem a extensão dele (sufixo)
+		done
+		return_str "$AVDS_LIST";
+	else # A variável "$installed_AVDs" é NULA
+		controller.GUIController defineAVDPath; #Usuário define a pasta AVDs
+	fi
 }
 
 # Chamada o emulador do Android SDK para executar o AVD desejado pelo usuário.

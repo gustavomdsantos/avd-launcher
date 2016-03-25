@@ -1,6 +1,6 @@
 [**Português**](#português) | [**English**](#english)
 
-![AVD Launcher](http://cdn3.aptoide.com/imgs/a/d/c/adc53969fb60384ae370ef13555a3ff4.png) AVD Launcher
+![AVD Launcher](./avd-launcher/usr/share/icons/hicolor/48x48/apps/android.png) AVD Launcher
 =====================================================================================================
 
 [![Stories in Backlog](https://img.shields.io/github/issues-raw/gustavosotnas/avd-launcher.svg?label=backlog&style=plastic)](https://waffle.io/gustavosotnas/avd-launcher)
@@ -15,22 +15,22 @@ Português
 
 ### *Screenshots*
 
-![0.Init-FirstTime](./assets/screenshots/0.Init-FirstTime.png) <br>
+![0.Init-FirstTime](../../wiki/assets/screenshots/0.Init-FirstTime.png) <br>
 *Janela de definição da pasta do Android SDK (aparece apenas na primeira vez)*
 
-![1.Init-FirstTime-AVDfolder-Error](./assets/screenshots/1.Init-FirstTime-AVDfolder-Error.png) <br>
+![1.Init-FirstTime-AVDfolder-Error](../../wiki/assets/screenshots/1.Init-FirstTime-AVDfolder-Error.png) <br>
 *Janela de erro na detecção automática dos AVDs no sistema (aparece apenas na primeira vez)*
 
-![2.SelectAVD](./assets/screenshots/2.SelectAVD.png) <br>
+![2.SelectAVD](../../wiki/assets/screenshots/2.SelectAVD.png) <br>
 *Menu de seleção do AVD desejado para executar*
 
-![3.LoadingAVD](./assets/screenshots/3.LoadingAVD.png) <br>
+![3.LoadingAVD](../../wiki/assets/screenshots/3.LoadingAVD.png) <br>
 *Janela de carregamento do AVD*
 
-![4.AVD-menu](./assets/screenshots/4.AVD-menu.png) <br>
+![4.AVD-menu](../../wiki/assets/screenshots/4.AVD-menu.png) <br>
 *Menu exibido durante a execução do AVD* *[(a implementar)](https://github.com/gustavosotnas/avd-launcher/issues/8)*
 
-![5.About](./assets/screenshots/5.About.png) <br>
+![5.About](../../wiki/assets/screenshots/5.About.png) <br>
 *Janela "Sobre", com informações do programa e sua versão.*
 
 ### Licença
@@ -71,7 +71,7 @@ Contribuidores são bem vindos! [Issues - gustavosotnas/avd-launcher](https://gi
 English
 --------------------------
 
-AVD Launcher is a *front-end* to the Android Virtual Devices (AVDs) emulator from Google. Written in [Bash](https://www.gnu.org/software/bash), the tool allows you to run *Android SDK* emulator without opening *Android Studio* and without using command-line interface (*terminal*).
+**AVD Launcher** is a *front-end* to the Android Virtual Devices (AVDs) emulator from Google. Written in [Bash](https://www.gnu.org/software/bash), the tool allows you to run *Android SDK* emulator without opening *Android Studio* and without using command-line interface (*terminal*).
 
 ### License
 **AVD Launcher** is distributed under the terms of the [GNU General Public License](http://www.gnu.org/licenses/), version 2 or later. See the COPYING file for details.

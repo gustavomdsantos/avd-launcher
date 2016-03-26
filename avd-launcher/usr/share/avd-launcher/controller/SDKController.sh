@@ -52,10 +52,13 @@ verifyAVDPath()
 # 	"TRUE Android_Wear_Round_API_20 FALSE Nexus_6_API_21 FALSE Nexus_S_API_19"
 listInstalledAVDs()
 {
-	shopt -s nullglob;
-	local installed_AVDs=("`model.AVD getFolderPath`"/*.ini); # Se tiver nome de arquivo com "espaço", vai dar problema!
-	shopt -u nullglob; # Turn off to it doesn't interfere with anything later
-	#echo "${installed_AVDs[@]}"; # Aspas para evitar nomes de arquivo quebrados
+	local old_IFS=$IFS; # Armazena temp. o Internal Field Separator padrão
+	IFS=$'\n'; # Define separador (quebra de linha) para array "$installed_AVDs"
+	local installed_AVDs=($(find `model.AVD getFolderPath` -maxdepth 1 | sort | \
+	grep .ini | xargs --delimiter='\n' \
+	basename -a -s .ini));
+	IFS=$old_IFS; # Restaura o IFS padrão
+	#>&2 echo "${installed_AVDs[@]}"
 
 	if [ -n "$installed_AVDs" ] # Se a variável de AVDs instalados NÃO for nula
 	then # Existem AVDs no computador
@@ -68,7 +71,7 @@ listInstalledAVDs()
 			else
 				AVDS_LIST="${AVDS_LIST}FALSE "; # Palavra-chave do "yad" para NÃO marcar na lista
 			fi
-			AVDS_LIST="${AVDS_LIST}`basename "$f" .ini` "; # Imprime o nome do arquivo sem a extensão dele (sufixo)
+			AVDS_LIST="${AVDS_LIST}${f// / } "; # O nome do AVD, substituindo espaços (" ") por caractere unicode U+2004
 		done
 		return_str "$AVDS_LIST";
 	else # A variável "$installed_AVDs" é NULA

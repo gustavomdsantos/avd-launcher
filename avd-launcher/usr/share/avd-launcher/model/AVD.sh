@@ -60,7 +60,7 @@ setDefaultFolderPath()
 #	"$CONFIG_FILE_AVDS" - arquivo de configuração contendo o path do AVDs válido
 setFolderPath()
 {
-	if [ -d "$1" ] && [ -f "$1"/*.ini ] # Se a pasta existe e existe algum .ini
+	if locateAVDPathFiles "$1" # Se a pasta existe e existe algum .ini
 	then # É a pasta dos AVDs
 		mkdir `dirname "$CONFIG_FILE_AVDS"` 2> /dev/null; # Cria pasta de config
 		echo "$1" > "$CONFIG_FILE_AVDS"; # Seta para o arquivo de configuração
@@ -68,6 +68,16 @@ setFolderPath()
 	else # Não é uma pasta válida, GUIController exibe dialogo "invalid folder"
 		return $FALSE;
 	fi
+}
+
+# Função "privada",
+# verifica se a pasta do AVD passada por parâmetro existe e há algum .ini nela.
+locateAVDPathFiles()
+{
+	find "$1" -type d -wholename "$1" | egrep '.*' >/dev/null && \
+	find "$1" -type f -name "*.ini" | egrep '.*' >/dev/null
+
+	return $?;
 }
 
 ### MAIN com variáveis de classe (fields) ####

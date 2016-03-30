@@ -51,6 +51,9 @@ setDefaultFolderPath()
 
 # Função que verifica se o caminho dos AVDs dado é válido
 # e seta tal caminho num arquivo de configuração.
+# O "if" com "find" e "grep" abaixo é solução baseada nas respostas de fórum:
+# 	http://stackoverflow.com/a/3925376 - "find" sem recursão
+# 	http://serverfault.com/a/225827 - "grep" retorna 1 se "find" stdout = null
 # Parâmetros:
 #	$1 - Caminho do diretório que supostamente contém os AVDs
 # Saídas:
@@ -60,7 +63,8 @@ setDefaultFolderPath()
 #	"$CONFIG_FILE_AVDS" - arquivo de configuração contendo o path do AVDs válido
 setFolderPath()
 {
-	if locateAVDPathFiles "$1" # Se a pasta existe e existe algum .ini
+	# Se pasta existe e existe algum .ini (redireciona stdout -> "Buraco Negro")
+	if find "$1" -maxdepth 1 -type f -name "*.ini" | grep '.*' >/dev/null
 	then # É a pasta dos AVDs
 		mkdir `dirname "$CONFIG_FILE_AVDS"` 2> /dev/null; # Cria pasta de config
 		echo "$1" > "$CONFIG_FILE_AVDS"; # Seta para o arquivo de configuração
@@ -68,16 +72,6 @@ setFolderPath()
 	else # Não é uma pasta válida, GUIController exibe dialogo "invalid folder"
 		return $FALSE;
 	fi
-}
-
-# Função "privada",
-# verifica se a pasta do AVD passada por parâmetro existe e há algum .ini nela.
-locateAVDPathFiles()
-{
-	find "$1" -type d -wholename "$1" | egrep '.*' >/dev/null && \
-	find "$1" -type f -name "*.ini" | egrep '.*' >/dev/null
-
-	return $?;
 }
 
 ### MAIN com variáveis de classe (fields) ####

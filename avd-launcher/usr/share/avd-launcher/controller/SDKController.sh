@@ -86,9 +86,9 @@ listInstalledAVDs()
 runAndroidSDKEmulator()
 {
 	# Muda diretório para chamar o emulador com o ponto-barra ("./")
-	cd "`model.AndroidSDK getFolderPath`"/tools; # NÃO MODIFIQUE ISSO!
+	cd "`model.AndroidSDK getFolderPath`"/emulator; # NÃO MODIFIQUE ISSO!
 	# Executa o Android SDK Emulator
-	>&2 ./emulator -avd "$CHOSEN_AVD" -netspeed full -netdelay none >/dev/null;
+	>&2 ./emulator -avd "$CHOSEN_AVD" -netspeed full -netdelay none -gpu swiftshader >/dev/null;
 }
 
 ### MAIN ####
